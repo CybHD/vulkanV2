@@ -17,21 +17,25 @@ public class HomeExecutor implements CommandExecutor {
 		Player p = (Player) sender;
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
-		if (stats.isSet("Home.World")) {
-			if (Bukkit.getWorld(stats.getString("Home.World")).getName().equals("world")) {
-				Location loc = new Location(Bukkit.getWorld(stats.getString("Home.World")), stats.getDouble("Home.X"),
-						stats.getDouble("Home.Y"), stats.getDouble("Home.Z"),
-						Float.valueOf(stats.getString("Home.Yaw")), Float.valueOf(stats.getString("Home.Pitch")));
-				if (loc.getWorld().getName().equals(Bukkit.getWorld("world").getName())) {
-					p.teleport(loc);
+		if (p.getLocation().getWorld().getName().equals("world") || p.getLocation().getWorld().getName().equals("spawn")) {
+			if (stats.isSet("Home.World")) {
+				if (Bukkit.getWorld(stats.getString("Home.World")).getName().equals("world")) {
+					Location loc = new Location(Bukkit.getWorld(stats.getString("Home.World")),
+							stats.getDouble("Home.X"), stats.getDouble("Home.Y"), stats.getDouble("Home.Z"),
+							Float.valueOf(stats.getString("Home.Yaw")), Float.valueOf(stats.getString("Home.Pitch")));
+					if (loc.getWorld().getName().equals(Bukkit.getWorld("world").getName())) {
+						p.teleport(loc);
+					} else {
+						p.sendMessage("§cDein Home darf sich nur in der normalen Welt befinden");
+					}
 				} else {
 					p.sendMessage("§cDein Home darf sich nur in der normalen Welt befinden");
 				}
 			} else {
-				p.sendMessage("§cDein Home darf sich nur in der normalen Welt befinden");
+				p.sendMessage("§cDu hast noch kein Home");
 			}
 		} else {
-			p.sendMessage("§cDu hast noch kein Home");
+			p.sendMessage("§6Du kannst §c/home §6nur in der normalen Welt oder am Warp benutzen");
 		}
 		return false;
 	}
