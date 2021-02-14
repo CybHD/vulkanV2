@@ -6,7 +6,7 @@
 
 # eclipse specific git ignore
 *.pydevproject
-vulkanV2/.project
+.project
 .metadata
 tmp/**
 tmp/**/*
@@ -15,8 +15,8 @@ tmp/**/*
 *.swp
 *~.nib
 local.properties
-vulkanV2/.classpath
-vulkanV2/.settings/
+.classpath
+.settings/
 .loadpath
 
 # External tool builders
