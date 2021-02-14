@@ -169,25 +169,8 @@ public class Main extends JavaPlugin {
 		if (!this.getDataFolder().exists()) {
 			this.getDataFolder().mkdir();
 		}
-		/**
-		 * Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getMain(), new
-		 * Runnable() {
-		 * 
-		 * @Override public void run() { Game.setTime(); Game.countAdd(); //Used for
-		 *           Jobs } }, 0, 20 * 60);
-		 **/
-
-		// ENABLE for Rainbow Armor
-		// mainLoop().runTaskTimer(this, 1, 1);
 	}
 
-	/*
-	 * public BukkitRunnable mainLoop() { return new BukkitRunnable() {
-	 * 
-	 * @Override public void run() { hue.forEach((uuid, h) -> { Player p =
-	 * Bukkit.getPlayer(uuid); if (p != null && p.isOnline()) { h = handleColor(h,
-	 * 0.005f); setArmor(p, h, 0.02f); hue.put(uuid, h); } }); } }; }
-	 */
 	@SuppressWarnings("unused")
 	private void setArmor(Player p, float hue, float gradientSpeed) {
 		ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
