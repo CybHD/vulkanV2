@@ -18,12 +18,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import net.cybhd.vn.main.Game;
+
 public class ReportsExecutor implements CommandExecutor, Listener {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
-		if (p.hasPermission("vk.mod")) {
+		if (p.hasPermission(Game.getModPermission()) || p.hasPermission(Game.getAdminPermission())) {
 		File frep = new File("plugins/vulkan/REPORTS.yml");
 		YamlConfiguration rep = YamlConfiguration.loadConfiguration(frep);
 		Inventory inv = Bukkit.createInventory(null, 27, "§cReport Liste");

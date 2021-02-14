@@ -14,7 +14,7 @@ public class EcoExecutor implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-		if (sender.hasPermission("vk.mod") || sender.hasPermission(Game.getAdminPermission())) {
+		if (sender.hasPermission(Game.getModPermission()) || sender.hasPermission(Game.getAdminPermission())) {
 			if (args.length == 2) {
 				if (args[0].equalsIgnoreCase("get")) {
 					Player p = (Player) sender;
