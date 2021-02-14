@@ -1,4 +1,5 @@
 /net/
+/bin/net/cybhd/vn/
 .classpath
 .project
-bin/net/cybhd/vn/
+.settings
