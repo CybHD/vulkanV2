@@ -25,7 +25,7 @@ public class Util {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		Scoreboard s = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective obj = s.registerNewObjective("Main", "Main", "§e >>> §6§lMCHype.net §r§e<<<");
+		Objective obj = s.registerNewObjective("Main", "Main", "§e§n >>> §6§lMCHype.net §r§e<<<");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		obj.getScore("§1").setScore(11);
@@ -48,19 +48,19 @@ public class Util {
 		//
 		obj.getScore("§6Dein Geld:").setScore(7);
 		//
-		obj.getScore("§c§l" + Eco.get(p) + " §r§6$").setScore(6);
+		obj.getScore("§c§o" + Eco.get(p) + " §r§6$").setScore(6);
 		//
 		obj.getScore("§3").setScore(5);
 		//
 		obj.getScore("§6K §7/ §6D").setScore(4);
 		//
-		obj.getScore("§c§l" + stats.getInt("Kills") + " §r§7/ §c§l" + stats.getInt("Deaths")).setScore(3);
+		obj.getScore("§c§o" + stats.getInt("Kills") + " §r§7/ §c§o" + stats.getInt("Deaths")).setScore(3);
 		//
 		obj.getScore("§4").setScore(2);
 		//
 		obj.getScore("§6Spieler Online:").setScore(1);
 		//
-		obj.getScore("§c§l" + Bukkit.getOnlinePlayers().size()).setScore(0);
+		obj.getScore("§c§o" + Bukkit.getOnlinePlayers().size()).setScore(0);
 
 		// -- 11
 		// Dein Rang: 10
