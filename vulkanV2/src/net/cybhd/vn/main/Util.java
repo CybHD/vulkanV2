@@ -22,7 +22,7 @@ public class Util {
 		
 		obj.getScore("§1").setScore(10);
 		//
-		obj.getScore("§7Dein Rang:").setScore(9);
+		obj.getScore("§6Dein Rang:").setScore(9);
 		//
 		if (p.hasPermission(Game.getAdminPermission())) {
 		obj.getScore("§4Admin").setScore(8);
