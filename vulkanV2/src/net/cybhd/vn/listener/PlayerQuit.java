@@ -3,6 +3,7 @@ package net.cybhd.vn.listener;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import net.cybhd.vn.main.Game;
 import net.cybhd.vn.main.Main;
+import net.cybhd.vn.main.Util;
 
 public class PlayerQuit implements Listener {
 
@@ -60,7 +62,12 @@ public class PlayerQuit implements Listener {
 		} else {
 			e.setQuitMessage("§c< " + p.getPlayerListName());
 		}
-
+		
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			ps.setScoreboard(Util.getBaseScoreboard(ps));
+			Util.updateTab(ps);
+		}
+		
 		if (Main.hue != null) {
 			if (Main.hue.containsKey(p.getUniqueId())) {
 				Main.hue.remove(p.getUniqueId());

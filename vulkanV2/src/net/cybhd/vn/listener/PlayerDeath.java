@@ -3,6 +3,7 @@ package net.cybhd.vn.listener;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import net.cybhd.vn.main.Game;
 import net.cybhd.vn.main.Main;
+import net.cybhd.vn.main.Util;
 
 public class PlayerDeath implements Listener {
 
@@ -65,7 +67,12 @@ public class PlayerDeath implements Listener {
 		} else {
 			e.setDeathMessage("§c" + p.getName() + " §6ist gestorben");
 		}
-
+		
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			ps.setScoreboard(Util.getBaseScoreboard(ps));
+			Util.updateTab(ps);
+		}
+		
 		if (Main.hue != null) {
 			if (Main.hue.containsKey(p.getUniqueId())) {
 				Main.hue.remove(p.getUniqueId());

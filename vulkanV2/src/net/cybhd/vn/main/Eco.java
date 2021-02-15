@@ -27,6 +27,7 @@ public class Eco {
 		}
 		for (Player ps : Bukkit.getOnlinePlayers()) {
 			ps.setScoreboard(Util.getBaseScoreboard(ps));
+			Util.updateTab(ps);
 		}
 	}
 
@@ -48,6 +49,7 @@ public class Eco {
 		}
 		for (Player ps : Bukkit.getOnlinePlayers()) {
 			ps.setScoreboard(Util.getBaseScoreboard(ps));
+			Util.updateTab(ps);
 		}
 	}
 	
@@ -66,6 +68,7 @@ public class Eco {
 		}
 		for (Player ps : Bukkit.getOnlinePlayers()) {
 			ps.setScoreboard(Util.getBaseScoreboard(ps));
+			Util.updateTab(ps);
 		}
 	}
 	
@@ -82,6 +85,7 @@ public class Eco {
 		}
 		for (Player ps : Bukkit.getOnlinePlayers()) {
 			ps.setScoreboard(Util.getBaseScoreboard(ps));
+			Util.updateTab(ps);
 		}
 	}
 
@@ -102,6 +106,7 @@ public class Eco {
 		}
 		for (Player ps : Bukkit.getOnlinePlayers()) {
 			ps.setScoreboard(Util.getBaseScoreboard(ps));
+			Util.updateTab(ps);
 		}
 	}
 
