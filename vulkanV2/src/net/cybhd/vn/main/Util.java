@@ -33,34 +33,34 @@ public class Util {
 		obj.getScore("§6Dein Rang:").setScore(10);
 		//
 		if (p.hasPermission(Game.getAdminPermission())) {
-			obj.getScore("§4Admin").setScore(9);
+			obj.getScore("§l§4Admin").setScore(9);
 		} else if (p.hasPermission(Game.getModPermission())) {
-			obj.getScore("§cModerator").setScore(9);
+			obj.getScore("§l§cModerator").setScore(9);
 		} else if (p.hasPermission(Game.getSupPermission())) {
-			obj.getScore("§9Supporter").setScore(9);
+			obj.getScore("§l§9Supporter").setScore(9);
 		} else if (p.hasPermission(Game.getPremPermission())) {
-			obj.getScore("§6Premium").setScore(9);
+			obj.getScore("§l§6Premium").setScore(9);
 		} else {
-			obj.getScore("§2Spieler").setScore(9);
+			obj.getScore("§l§2Spieler").setScore(9);
 		}
 		//
 		obj.getScore("§2").setScore(8);
 		//
 		obj.getScore("§6Dein Geld:").setScore(7);
 		//
-		obj.getScore("§c" + Eco.get(p) + " §6$").setScore(6);
+		obj.getScore("§l§c" + Eco.get(p) + " §r§6$").setScore(6);
 		//
 		obj.getScore("§3").setScore(5);
 		//
 		obj.getScore("§6K §7/ §6D").setScore(4);
 		//
-		obj.getScore("§c" + stats.getInt("Kills") + " §7/ §c" + stats.getInt("Deaths")).setScore(3);
+		obj.getScore("§l§c" + stats.getInt("Kills") + " §r§7/ §l§c" + stats.getInt("Deaths")).setScore(3);
 		//
 		obj.getScore("§4").setScore(2);
 		//
 		obj.getScore("§6Spieler Online:").setScore(1);
 		//
-		obj.getScore("§c" + Bukkit.getOnlinePlayers().size()).setScore(0);
+		obj.getScore("§l§c" + Bukkit.getOnlinePlayers().size()).setScore(0);
 
 		// -- 11
 		// Dein Rang: 10
