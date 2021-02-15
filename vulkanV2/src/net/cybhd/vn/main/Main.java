@@ -153,7 +153,7 @@ public class Main extends JavaPlugin {
 		this.getCommand("abilitys").setExecutor(new AbilitiesExecutor());
 		this.getCommand("abilities").setExecutor(new AbilitiesExecutor());
 		this.getCommand("clan").setExecutor(new ClanExecutor());
-
+		
 		if (!this.getDataFolder().exists()) {
 			this.getDataFolder().mkdir();
 		}

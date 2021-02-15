@@ -61,9 +61,9 @@ public class Util {
 		//
 		obj.getScore("§c" + Bukkit.getOnlinePlayers().size()).setScore(0);
 		
-		
 		s.registerNewTeam("Player");
 		s.getTeam("Player").setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		s.getTeam("Player").addEntry(p.getName());
 		
 		//--					11
 		//Dein Rang:			10
