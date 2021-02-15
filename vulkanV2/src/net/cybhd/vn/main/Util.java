@@ -62,70 +62,6 @@ public class Util {
 		//
 		obj.getScore("§c" + Bukkit.getOnlinePlayers().size()).setScore(0);
 
-		Team admin1 = s.getTeam("0000Admin");
-		Team mod1 = s.getTeam("0001Mod");
-		Team sup1 = s.getTeam("0002Sup");
-		Team prem1 = s.getTeam("0003Prem");
-		Team spieler1 = s.getTeam("0004Spieler");
-
-		if (admin1 == null || mod1 == null || sup1 == null || prem1 == null || spieler1 == null) {
-			Team admin = s.registerNewTeam("0000Admin");
-			Team mod = s.registerNewTeam("0001Mod");
-			Team sup = s.registerNewTeam("0002Sup");
-			Team prem = s.registerNewTeam("0003Prem");
-			Team spieler = s.registerNewTeam("0004Spieler");
-			admin.setPrefix("§4");
-			admin.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			mod.setPrefix("§c");
-			mod.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			sup.setPrefix("§9");
-			sup.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			prem.setPrefix("§6");
-			prem.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			spieler.setPrefix("§a");
-			spieler.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-
-			if (p.hasPermission(Game.getAdminPermission())) {
-				admin.addEntry(p.getName());
-			} else if (p.hasPermission(Game.getModPermission())) {
-				mod.addEntry(p.getName());
-			} else if (p.hasPermission(Game.getSupPermission())) {
-				sup.addEntry(p.getName());
-			} else if (p.hasPermission(Game.getPremPermission())) {
-				prem.addEntry(p.getName());
-			} else {
-				spieler.addEntry(p.getName());
-			}
-		} else {
-			Team admin = s.getTeam("0000Admin");
-			Team mod = s.getTeam("0001Mod");
-			Team sup = s.getTeam("0002Sup");
-			Team prem = s.getTeam("0003Prem");
-			Team spieler = s.getTeam("0004Spieler");
-			admin.setPrefix("§4");
-			admin.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			mod.setPrefix("§c");
-			mod.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			sup.setPrefix("§9");
-			sup.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			prem.setPrefix("§6");
-			prem.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			spieler.setPrefix("§a");
-			spieler.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-
-			if (p.hasPermission(Game.getAdminPermission())) {
-				admin.addEntry(p.getName());
-			} else if (p.hasPermission(Game.getModPermission())) {
-				mod.addEntry(p.getName());
-			} else if (p.hasPermission(Game.getSupPermission())) {
-				sup.addEntry(p.getName());
-			} else if (p.hasPermission(Game.getPremPermission())) {
-				prem.addEntry(p.getName());
-			} else {
-				spieler.addEntry(p.getName());
-			}
-		}
-
 		// -- 11
 		// Dein Rang: 10
 		// *Rang* 9
@@ -140,6 +76,70 @@ public class Util {
 		// *x von MaxPlayer* 0
 
 		return s;
+	}
+
+	public static void setTab(Player p) {
+		Scoreboard s = p.getScoreboard();
+
+		Team admin = s.registerNewTeam("0000Admin");
+		Team mod = s.registerNewTeam("0001Mod");
+		Team sup = s.registerNewTeam("0002Sup");
+		Team prem = s.registerNewTeam("0003Prem");
+		Team spieler = s.registerNewTeam("0004Spieler");
+
+		admin.setPrefix("§4");
+		admin.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		mod.setPrefix("§c");
+		mod.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		sup.setPrefix("§9");
+		sup.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		prem.setPrefix("§6");
+		prem.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		spieler.setPrefix("§a");
+		spieler.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			if (ps.hasPermission(Game.getAdminPermission())) {
+				admin.addEntry(ps.getName());
+			} else if (ps.hasPermission(Game.getModPermission())) {
+				mod.addEntry(ps.getName());
+			} else if (ps.hasPermission(Game.getSupPermission())) {
+				sup.addEntry(ps.getName());
+			} else if (ps.hasPermission(Game.getPremPermission())) {
+				prem.addEntry(ps.getName());
+			} else {
+				spieler.addEntry(ps.getName());
+			}
+		}
+	}
+
+	public static void updateTab(Player p) {
+		Scoreboard s = p.getScoreboard();
+
+		Team admin = s.getTeam("0000Admin");
+		Team mod = s.getTeam("0001Mod");
+		Team sup = s.getTeam("0002Sup");
+		Team prem = s.getTeam("0003Prem");
+		Team spieler = s.getTeam("0004Spieler");
+
+		if (admin == null || mod == null || sup == null || prem == null || spieler == null) {
+			setTab(p);
+			return;
+		}
+
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			if (ps.hasPermission(Game.getAdminPermission())) {
+				admin.addEntry(ps.getName());
+			} else if (ps.hasPermission(Game.getModPermission())) {
+				mod.addEntry(ps.getName());
+			} else if (ps.hasPermission(Game.getSupPermission())) {
+				sup.addEntry(ps.getName());
+			} else if (ps.hasPermission(Game.getPremPermission())) {
+				prem.addEntry(ps.getName());
+			} else {
+				spieler.addEntry(ps.getName());
+			}
+		}
 	}
 
 	public void stopServer(Player p, String s1) {

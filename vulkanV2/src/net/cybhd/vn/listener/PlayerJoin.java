@@ -158,6 +158,12 @@ public class PlayerJoin implements Listener {
 			ps.setScoreboard(Util.getBaseScoreboard(ps));
 		}
 		
+		Util.setTab(p);
+		
+		for (Player ps: Bukkit.getOnlinePlayers()) {
+			Util.updateTab(ps);
+		}
+		
 		// Set Shop Prices
 		Game.setPrices();
 
