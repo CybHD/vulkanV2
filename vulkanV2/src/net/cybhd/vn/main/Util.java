@@ -4,6 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -11,6 +14,62 @@ import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.TextComponent;
 
 public class Util {
+	
+	public static Scoreboard getBaseScoreboard(Player p) {
+		Scoreboard s = Bukkit.getScoreboardManager().getNewScoreboard();
+		Objective obj = s.registerNewObjective("Main", "Main" , "MCHype.net");
+		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+		
+		obj.getScore("§1").setScore(0);
+		//
+		obj.getScore("§7Dein Rang:").setScore(1);
+		//
+		if (p.hasPermission(Game.getAdminPermission())) {
+		obj.getScore("§4Admin").setScore(2);
+		} else if (p.hasPermission(Game.getModPermission())) {
+			obj.getScore("§cModerator").setScore(2);
+		} else if (p.hasPermission(Game.getSupPermission())) {
+			obj.getScore("§9Supporter").setScore(2);
+		} else if (p.hasPermission(Game.getPremPermission())) {
+			obj.getScore("§6Premium").setScore(2);
+		} else {
+			obj.getScore("§aSpieler").setScore(2);
+		}
+		//
+		obj.getScore("§2").setScore(3);
+		//
+		obj.getScore("§6Dein Geld:").setScore(4);
+		//
+		obj.getScore("§c" + Eco.get(p) + " §6$").setScore(5);
+		//
+		obj.getScore("§3").setScore(6);
+		//
+		obj.getScore("§6K §7/ §6D").setScore(7);
+		//
+		obj.getScore("§c0 §7/ §c0").setScore(8);
+		//
+		obj.getScore("§6Spieler Online:").setScore(9);
+		//
+		obj.getScore("§c" + Bukkit.getOnlinePlayers().size() + " §7/ §c" + Bukkit.getMaxPlayers()).setScore(10);
+		
+		
+		//--					11
+		//Dein Rang:			10
+		//*Rang*				9
+		//--					8
+		//Dein Geld:			7
+		//*Geld*				6
+		//--					5
+		//K / D:				4
+		//*kills* / *deaths*	3
+		//--					2
+		//Online:				1
+		//*x von MaxPlayer*		0
+		
+		return s;
+	}
+	
+	
 	public void stopServer(Player p, String s1) {
 		new BukkitRunnable() {
 

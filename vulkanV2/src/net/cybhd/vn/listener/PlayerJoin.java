@@ -146,6 +146,10 @@ public class PlayerJoin implements Listener {
 		Main.addPlayerAndSetScoreboard(p);
 
 		Ability.set(p);
+		
+		if (p.hasMetadata("vulkan.vanish")) {
+			p.removeMetadata("vulkan.vanish", Main.getMain());
+		}
 
 		for (Player ps : Bukkit.getOnlinePlayers()) {
 			if (ps.hasMetadata("vulkan.vanish")) {
@@ -154,13 +158,11 @@ public class PlayerJoin implements Listener {
 				}
 			}
 		}
-
-		if (Game.isTeamMember(p)) {
-			p.setMetadata("vulkan.vanish", new FixedMetadataValue(Main.getMain(), false));
-		}
 		
 		// Set Shop Prices
 		Game.setPrices();
+		
+		p.setScoreboard(Util.getBaseScoreboard(p));
 
 		p.teleport(Main.getSpawnLoc());
 	}
