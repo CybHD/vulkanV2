@@ -17,36 +17,38 @@ public class Util {
 	
 	public static Scoreboard getBaseScoreboard(Player p) {
 		Scoreboard s = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective obj = s.registerNewObjective("Main", "Main" , "MCHype.net");
+		Objective obj = s.registerNewObjective("Main", "Main" , "§6§lMCHype.net");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
-		obj.getScore("§1").setScore(10);
+		obj.getScore("§1").setScore(11);
 		//
-		obj.getScore("§6Dein Rang:").setScore(9);
+		obj.getScore("§6Dein Rang:").setScore(10);
 		//
 		if (p.hasPermission(Game.getAdminPermission())) {
-		obj.getScore("§4Admin").setScore(8);
+		obj.getScore("§4Admin").setScore(9);
 		} else if (p.hasPermission(Game.getModPermission())) {
-			obj.getScore("§cModerator").setScore(8);
+			obj.getScore("§cModerator").setScore(9);
 		} else if (p.hasPermission(Game.getSupPermission())) {
-			obj.getScore("§9Supporter").setScore(8);
+			obj.getScore("§9Supporter").setScore(9);
 		} else if (p.hasPermission(Game.getPremPermission())) {
-			obj.getScore("§6Premium").setScore(8);
+			obj.getScore("§6Premium").setScore(9);
 		} else {
-			obj.getScore("§aSpieler").setScore(8);
+			obj.getScore("§aSpieler").setScore(9);
 		}
 		//
-		obj.getScore("§2").setScore(7);
+		obj.getScore("§2").setScore(8);
 		//
-		obj.getScore("§6Dein Geld:").setScore(6);
+		obj.getScore("§6Dein Geld:").setScore(7);
 		//
-		obj.getScore("§c" + Eco.get(p) + " §6$").setScore(5);
+		obj.getScore("§c" + Eco.get(p) + " §6$").setScore(6);
 		//
-		obj.getScore("§3").setScore(4);
+		obj.getScore("§3").setScore(5);
 		//
-		obj.getScore("§6K §7/ §6D").setScore(3);
+		obj.getScore("§6K §7/ §6D").setScore(4);
 		//
-		obj.getScore("§c0 §7/ §c0").setScore(2);
+		obj.getScore("§c0 §7/ §c0").setScore(3);
+		//
+		obj.getScore("§4").setScore(2);
 		//
 		obj.getScore("§6Spieler Online:").setScore(1);
 		//
