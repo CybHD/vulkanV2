@@ -25,7 +25,7 @@ public class Util {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		Scoreboard s = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective obj = s.registerNewObjective("Main", "Main", "§e§n >>> §6§lMCHype.net §r§e<<<");
+		Objective obj = s.registerNewObjective("Main", "Main", "§e§n >>> §6§l§nMCHype.net §r§e§n<<<");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		obj.getScore("§1").setScore(11);
@@ -33,15 +33,15 @@ public class Util {
 		obj.getScore("§6Dein Rang:").setScore(10);
 		//
 		if (p.hasPermission(Game.getAdminPermission())) {
-			obj.getScore("§4§lAdmin").setScore(9);
+			obj.getScore("§4§oAdmin").setScore(9);
 		} else if (p.hasPermission(Game.getModPermission())) {
-			obj.getScore("§c§lModerator").setScore(9);
+			obj.getScore("§c§oModerator").setScore(9);
 		} else if (p.hasPermission(Game.getSupPermission())) {
-			obj.getScore("§9§lSupporter").setScore(9);
+			obj.getScore("§9§oSupporter").setScore(9);
 		} else if (p.hasPermission(Game.getPremPermission())) {
-			obj.getScore("§6§lPremium").setScore(9);
+			obj.getScore("§6§oPremium").setScore(9);
 		} else {
-			obj.getScore("§2§lSpieler").setScore(9);
+			obj.getScore("§2§oSpieler").setScore(9);
 		}
 		//
 		obj.getScore("§2").setScore(8);
