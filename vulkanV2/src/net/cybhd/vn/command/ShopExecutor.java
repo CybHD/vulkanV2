@@ -22,7 +22,8 @@ public class ShopExecutor implements CommandExecutor {
 				if (p.getInventory().getItemInMainHand() != null
 						|| p.getInventory().getItemInMainHand().getType() != Material.AIR) {
 					if (Shop.isValidItem(p.getInventory().getItemInMainHand())) {
-						for (int i = 0; i < p.getInventory().getItemInMainHand().getAmount(); i++) {
+						int amount = p.getInventory().getItemInMainHand().getAmount();
+						for (int i = 0; i < amount; i++) {
 							Eco.sell(p.getInventory().getItemInMainHand().getType(), p);
 						}
 						p.sendMessage("§6Item erfolgreich im Shop verkauft");
