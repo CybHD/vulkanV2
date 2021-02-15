@@ -25,8 +25,8 @@ public class Eco {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (Game.isValidPlayerName(p.getName())) {
-			p.setScoreboard(Util.getBaseScoreboard(p));
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			ps.setScoreboard(Util.getBaseScoreboard(ps));
 		}
 	}
 
@@ -46,9 +46,8 @@ public class Eco {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (Game.isValidPlayerName(name)) {
-			Player p = Bukkit.getPlayer(name);
-			p.setScoreboard(Util.getBaseScoreboard(p));
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			ps.setScoreboard(Util.getBaseScoreboard(ps));
 		}
 	}
 	
@@ -65,8 +64,8 @@ public class Eco {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (Game.isValidPlayerName(p.getName())) {
-			p.setScoreboard(Util.getBaseScoreboard(p));
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			ps.setScoreboard(Util.getBaseScoreboard(ps));
 		}
 	}
 	
@@ -81,8 +80,8 @@ public class Eco {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (Game.isValidPlayerName(p.getName())) {
-			p.setScoreboard(Util.getBaseScoreboard(p));
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			ps.setScoreboard(Util.getBaseScoreboard(ps));
 		}
 	}
 
@@ -101,8 +100,8 @@ public class Eco {
 			p.sendMessage("§6Zu wenig Geld");
 			p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_HIT, 1, 1);
 		}
-		if (Game.isValidPlayerName(p.getName())) {
-			p.setScoreboard(Util.getBaseScoreboard(p));
+		for (Player ps : Bukkit.getOnlinePlayers()) {
+			ps.setScoreboard(Util.getBaseScoreboard(ps));
 		}
 	}
 

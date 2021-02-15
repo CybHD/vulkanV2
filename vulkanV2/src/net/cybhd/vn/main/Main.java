@@ -33,6 +33,7 @@ import net.cybhd.vn.command.ClanExecutor;
 import net.cybhd.vn.command.CraftExecutor;
 import net.cybhd.vn.command.EcoExecutor;
 import net.cybhd.vn.command.HomeExecutor;
+import net.cybhd.vn.command.HubExecutor;
 import net.cybhd.vn.command.JobExecutor;
 import net.cybhd.vn.command.ModeExecutor;
 import net.cybhd.vn.command.MsgExecutor;
@@ -129,6 +130,8 @@ public class Main extends JavaPlugin {
 		// Bukkit.getPluginManager().registerEvents(new ProjectileHit(), this);
 		Bukkit.getPluginManager().registerEvents(new Ability(), this);
 
+		this.getCommand("l").setExecutor(new HubExecutor());
+		this.getCommand("hub").setExecutor(new HubExecutor());
 		this.getCommand("pay").setExecutor(new PayExecutor());
 		this.getCommand("eco").setExecutor(new EcoExecutor());
 		this.getCommand("tpa").setExecutor(new TpaExecutor());
@@ -142,6 +145,7 @@ public class Main extends JavaPlugin {
 		this.getCommand("craft").setExecutor(new CraftExecutor());
 		this.getCommand("plot").setExecutor(new PlotExecutor());
 		this.getCommand("home").setExecutor(new HomeExecutor());
+		this.getCommand("lobby").setExecutor(new HubExecutor());
 		this.getCommand("sethome").setExecutor(new SetHomeExecutor());
 		this.getCommand("auction").setExecutor(new AuctionExecutor());
 		this.getCommand("auktion").setExecutor(new AuctionExecutor());
