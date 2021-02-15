@@ -157,12 +157,11 @@ public class PlayerJoin implements Listener {
 					p.hidePlayer(Main.getMain(), ps);
 				}
 			}
+			ps.setScoreboard(Util.getBaseScoreboard(p));
 		}
 		
 		// Set Shop Prices
 		Game.setPrices();
-		
-		p.setScoreboard(Util.getBaseScoreboard(p));
 
 		p.teleport(Main.getSpawnLoc());
 	}

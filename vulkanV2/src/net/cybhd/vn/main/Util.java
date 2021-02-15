@@ -57,7 +57,7 @@ public class Util {
 		//
 		obj.getScore("§6Spieler Online:").setScore(1);
 		//
-		obj.getScore("§c" + Bukkit.getOnlinePlayers().size() + " §7/ §c" + Bukkit.getMaxPlayers()).setScore(0);
+		obj.getScore("§c" + Bukkit.getOnlinePlayers().size()).setScore(0);
 		
 		
 		//--					11
