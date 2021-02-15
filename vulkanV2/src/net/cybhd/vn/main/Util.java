@@ -1,7 +1,10 @@
 package net.cybhd.vn.main;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -16,6 +19,8 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class Util {
 	
 	public static Scoreboard getBaseScoreboard(Player p) {
+		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
+		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		Scoreboard s = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = s.registerNewObjective("Main", "Main" , "§6§lMCHype.net");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -46,7 +51,7 @@ public class Util {
 		//
 		obj.getScore("§6K §7/ §6D").setScore(4);
 		//
-		obj.getScore("§c0 §7/ §c0").setScore(3);
+		obj.getScore("§c" + stats.getInt("Deaths") + " §7/ §c" + stats.getInt("Kills")).setScore(3);
 		//
 		obj.getScore("§4").setScore(2);
 		//

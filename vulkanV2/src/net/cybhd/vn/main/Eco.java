@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -24,6 +25,9 @@ public class Eco {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if (Game.isValidPlayerName(p.getName())) {
+			p.setScoreboard(Util.getBaseScoreboard(p));
+		}
 	}
 
 	public static double get(Player p) {
@@ -42,6 +46,10 @@ public class Eco {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if (Game.isValidPlayerName(name)) {
+			Player p = Bukkit.getPlayer(name);
+			p.setScoreboard(Util.getBaseScoreboard(p));
+		}
 	}
 	
 	public static void add(Player p, Double amount, boolean silent) {
@@ -57,6 +65,9 @@ public class Eco {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if (Game.isValidPlayerName(p.getName())) {
+			p.setScoreboard(Util.getBaseScoreboard(p));
+		}
 	}
 	
 	public static void add(Player p, Double amount) {
@@ -69,6 +80,9 @@ public class Eco {
 			p.sendMessage("§6Du erhältst §c" + amount + " §6$");
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		if (Game.isValidPlayerName(p.getName())) {
+			p.setScoreboard(Util.getBaseScoreboard(p));
 		}
 	}
 
@@ -86,6 +100,9 @@ public class Eco {
 		} else {
 			p.sendMessage("§6Zu wenig Geld");
 			p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_HIT, 1, 1);
+		}
+		if (Game.isValidPlayerName(p.getName())) {
+			p.setScoreboard(Util.getBaseScoreboard(p));
 		}
 	}
 
@@ -596,6 +613,7 @@ public class Eco {
 			}
 			break;
 		}
+		//Log Transaction
 		String time = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
 		File fstats = new File("plugins/vulkan/SHOP.yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
