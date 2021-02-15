@@ -113,8 +113,9 @@ public class InventoryClick implements Listener {
 													b = false;
 													Eco.remove(p, price);
 													Auction.removeItem(Integer.valueOf(key));
-													p.sendMessage("§6Du hast dir etwas für §c" + price
-															+ " §6$ im Auktionshaus gekauft");
+													p.sendMessage("§6Du hast §c" + item.getAmount() + " "
+															+ item.getType().name() + " §6von §c" + seller + " §6für §c"
+															+ price + " §6$ im Auktionshaus gekauft");
 													p.getInventory().addItem(item);
 													Eco.addOfflinePlayer(seller, price);
 													Auction.updateInventory();
@@ -122,6 +123,7 @@ public class InventoryClick implements Listener {
 														Player t = Bukkit.getPlayer(seller);
 														t.sendMessage(p.getPlayerListName() + " §6hat §c"
 																+ item.getAmount() + " " + item.getType().name()
+																+ " §6für §c" + price + " §6$"
 																+ " §6von dir aus dem Auktionshaus gekauft");
 													}
 												}
