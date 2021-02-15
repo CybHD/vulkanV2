@@ -18,12 +18,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
-import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.bukkit.scoreboard.Team.Option;
-import org.bukkit.scoreboard.Team.OptionStatus;
 
 import net.cybhd.vn.ability.Ability;
 import net.cybhd.vn.command.AbilitiesExecutor;
@@ -76,12 +71,9 @@ import net.cybhd.vn.listener.PlayerRespawn;
 import net.cybhd.vn.listener.PortalEnter;
 import net.cybhd.vn.listener.Shop;
 import net.cybhd.vn.listener.WeatherChange;
-import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin {
 
-	public static ScoreboardManager sm;
-	public static Scoreboard sb;
 	public static Objective ob;
 	public static HashMap<UUID, Integer> bed = new HashMap<UUID, Integer>();
 	public static Main main;
@@ -95,9 +87,6 @@ public class Main extends JavaPlugin {
 		messenger.registerIncomingPluginChannel(this, "minecraft:brand", new BrandPluginMessageListener());
 
 		Game.Startup();
-
-		sb = Bukkit.getScoreboardManager().getNewScoreboard();
-		sm = Bukkit.getScoreboardManager();
 
 		Bukkit.getPluginManager().registerEvents(new EntitySpawn(), this);
 		Bukkit.getPluginManager().registerEvents(new CraftItem(), this);
@@ -164,11 +153,6 @@ public class Main extends JavaPlugin {
 		this.getCommand("abilitys").setExecutor(new AbilitiesExecutor());
 		this.getCommand("abilities").setExecutor(new AbilitiesExecutor());
 		this.getCommand("clan").setExecutor(new ClanExecutor());
-
-		sb.registerNewTeam("Player");
-		sb.getTeam("Player").setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-		ob = Main.sb.registerNewObjective("Test", "dummy", ChatColor.GOLD + "=== Torch ===");
-		ob.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		if (!this.getDataFolder().exists()) {
 			this.getDataFolder().mkdir();
@@ -298,12 +282,5 @@ public class Main extends JavaPlugin {
 	public static Location getWorldLoc() {
 		Location worldLOC = new Location(Bukkit.getWorld("world"), 104.5, 66, -6.5, 180, 0);
 		return worldLOC;
-	}
-
-	public static void addPlayerAndSetScoreboard(Player p) {
-		sb.getTeam("Player").addEntry(p.getName());
-		for (Player ps : Bukkit.getOnlinePlayers()) {
-			ps.setScoreboard(sb);
-		}
 	}
 }

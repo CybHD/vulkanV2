@@ -10,6 +10,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team.Option;
+import org.bukkit.scoreboard.Team.OptionStatus;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -59,6 +61,9 @@ public class Util {
 		//
 		obj.getScore("§c" + Bukkit.getOnlinePlayers().size()).setScore(0);
 		
+		
+		s.registerNewTeam("Player");
+		s.getTeam("Player").setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
 		
 		//--					11
 		//Dein Rang:			10

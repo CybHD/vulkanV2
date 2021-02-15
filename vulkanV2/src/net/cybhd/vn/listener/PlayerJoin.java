@@ -143,8 +143,6 @@ public class PlayerJoin implements Listener {
 		Util u = new Util();
 		u.sendGitMSG(p);
 
-		Main.addPlayerAndSetScoreboard(p);
-
 		Ability.set(p);
 		
 		if (p.hasMetadata("vulkan.vanish")) {
