@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import org.bukkit.scoreboard.Team.Option;
 import org.bukkit.scoreboard.Team.OptionStatus;
 
@@ -19,20 +20,20 @@ import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.TextComponent;
 
 public class Util {
-	
+
 	public static Scoreboard getBaseScoreboard(Player p) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		Scoreboard s = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective obj = s.registerNewObjective("Main", "Main" , "§6§lMCHype.net");
+		Objective obj = s.registerNewObjective("Main", "Main", "§6§lMCHype.net");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-		
+
 		obj.getScore("§1").setScore(11);
 		//
 		obj.getScore("§6Dein Rang:").setScore(10);
 		//
 		if (p.hasPermission(Game.getAdminPermission())) {
-		obj.getScore("§4Admin").setScore(9);
+			obj.getScore("§4Admin").setScore(9);
 		} else if (p.hasPermission(Game.getModPermission())) {
 			obj.getScore("§cModerator").setScore(9);
 		} else if (p.hasPermission(Game.getSupPermission())) {
@@ -53,35 +54,94 @@ public class Util {
 		//
 		obj.getScore("§6K §7/ §6D").setScore(4);
 		//
-		obj.getScore("§c" + stats.getInt("Deaths") + " §7/ §c" + stats.getInt("Kills")).setScore(3);
+		obj.getScore("§c" + stats.getInt("Kills") + " §7/ §c" + stats.getInt("Deaths")).setScore(3);
 		//
 		obj.getScore("§4").setScore(2);
 		//
 		obj.getScore("§6Spieler Online:").setScore(1);
 		//
 		obj.getScore("§c" + Bukkit.getOnlinePlayers().size()).setScore(0);
-		
-		s.registerNewTeam("Player");
-		s.getTeam("Player").setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-		s.getTeam("Player").addEntry(p.getName());
-		
-		//--					11
-		//Dein Rang:			10
-		//*Rang*				9
-		//--					8
-		//Dein Geld:			7
-		//*Geld*				6
-		//--					5
-		//K / D:				4
-		//*kills* / *deaths*	3
-		//--					2
-		//Online:				1
-		//*x von MaxPlayer*		0
-		
+
+		Team admin1 = s.getTeam("0000Admin");
+		Team mod1 = s.getTeam("0001Mod");
+		Team sup1 = s.getTeam("0002Sup");
+		Team prem1 = s.getTeam("0003Prem");
+		Team spieler1 = s.getTeam("0004Spieler");
+
+		if (admin1 == null || mod1 == null || sup1 == null || prem1 == null || spieler1 == null) {
+			Team admin = s.registerNewTeam("0000Admin");
+			Team mod = s.registerNewTeam("0001Mod");
+			Team sup = s.registerNewTeam("0002Sup");
+			Team prem = s.registerNewTeam("0003Prem");
+			Team spieler = s.registerNewTeam("0004Spieler");
+			admin.setPrefix("§4");
+			admin.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			mod.setPrefix("§c");
+			mod.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			sup.setPrefix("§9");
+			sup.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			prem.setPrefix("§6");
+			prem.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			spieler.setPrefix("§a");
+			spieler.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+
+			if (p.hasPermission(Game.getAdminPermission())) {
+				admin.addEntry(p.getName());
+			} else if (p.hasPermission(Game.getModPermission())) {
+				mod.addEntry(p.getName());
+			} else if (p.hasPermission(Game.getSupPermission())) {
+				sup.addEntry(p.getName());
+			} else if (p.hasPermission(Game.getPremPermission())) {
+				prem.addEntry(p.getName());
+			} else {
+				spieler.addEntry(p.getName());
+			}
+		} else {
+			Team admin = s.getTeam("0000Admin");
+			Team mod = s.getTeam("0001Mod");
+			Team sup = s.getTeam("0002Sup");
+			Team prem = s.getTeam("0003Prem");
+			Team spieler = s.getTeam("0004Spieler");
+			admin.setPrefix("§4");
+			admin.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			mod.setPrefix("§c");
+			mod.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			sup.setPrefix("§9");
+			sup.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			prem.setPrefix("§6");
+			prem.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			spieler.setPrefix("§a");
+			spieler.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+
+			if (p.hasPermission(Game.getAdminPermission())) {
+				admin.addEntry(p.getName());
+			} else if (p.hasPermission(Game.getModPermission())) {
+				mod.addEntry(p.getName());
+			} else if (p.hasPermission(Game.getSupPermission())) {
+				sup.addEntry(p.getName());
+			} else if (p.hasPermission(Game.getPremPermission())) {
+				prem.addEntry(p.getName());
+			} else {
+				spieler.addEntry(p.getName());
+			}
+		}
+
+		// -- 11
+		// Dein Rang: 10
+		// *Rang* 9
+		// -- 8
+		// Dein Geld: 7
+		// *Geld* 6
+		// -- 5
+		// K / D: 4
+		// *kills* / *deaths* 3
+		// -- 2
+		// Online: 1
+		// *x von MaxPlayer* 0
+
 		return s;
 	}
-	
-	
+
 	public void stopServer(Player p, String s1) {
 		new BukkitRunnable() {
 
@@ -108,8 +168,7 @@ public class Util {
 				"§6§m+                         §e§m                           §6§m                         +");
 
 	}
-	
-	
+
 	public void sendGitMSG(Player p) {
 		p.sendMessage("§l§3vulkanV2 §r§3ist jetzt Open-Source");
 		TextComponent here = new TextComponent();
@@ -120,8 +179,8 @@ public class Util {
 
 		p.spigot().sendMessage(here);
 	}
-	
+
 	public void calculateNextDayTime(Long time, World w) {
-		//int currentDays = (int) (time / 24000);
+		// int currentDays = (int) (time / 24000);
 	}
 }
