@@ -24,7 +24,9 @@ public class ShopExecutor implements CommandExecutor {
 					if (Shop.isValidItem(p.getInventory().getItemInMainHand())) {
 						int amount = p.getInventory().getItemInMainHand().getAmount();
 							Eco.sell(p.getInventory().getItemInMainHand().getType(), p, amount);
-							p.getInventory().remove(p.getInventory().getItemInMainHand());
+							for (int i = 0; i < amount; i++) {
+							Game.removeItem(p, p.getInventory().getItemInMainHand().getType());
+							}
 						p.sendMessage("§6Item erfolgreich im Shop verkauft");
 					} else {
 						p.sendMessage("§6Dieses Item wird nicht im Shop gehandelt");
