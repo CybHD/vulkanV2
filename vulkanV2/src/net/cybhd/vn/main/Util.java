@@ -25,7 +25,7 @@ public class Util {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		Scoreboard s = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective obj = s.registerNewObjective("Main", "Main", "§6 >>> §lMCHype.net §r§6<<<");
+		Objective obj = s.registerNewObjective("Main", "Main", "§e >>> §lMCHype.net §r§e<<<");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		obj.getScore("§1").setScore(11);
@@ -41,7 +41,7 @@ public class Util {
 		} else if (p.hasPermission(Game.getPremPermission())) {
 			obj.getScore("§6Premium").setScore(9);
 		} else {
-			obj.getScore("§aSpieler").setScore(9);
+			obj.getScore("§2Spieler").setScore(9);
 		}
 		//
 		obj.getScore("§2").setScore(8);
