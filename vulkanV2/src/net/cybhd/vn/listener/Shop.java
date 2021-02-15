@@ -1,10 +1,12 @@
 package net.cybhd.vn.listener;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
 import net.cybhd.vn.main.Eco;
 import net.cybhd.vn.main.Game;
@@ -158,5 +160,12 @@ public class Shop implements Listener {
 
 	public boolean invFull(Player p) { // Funktioniert Gut!
 		return p.getInventory().firstEmpty() == -1;
+	}
+	
+	public static boolean isValidItem(ItemStack i) {
+		if (i.getType() == Material.DIRT) {
+			return true;
+		}
+		return false;
 	}
 }

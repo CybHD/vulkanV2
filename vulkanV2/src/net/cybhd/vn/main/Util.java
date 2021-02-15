@@ -25,7 +25,7 @@ public class Util {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		Scoreboard s = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective obj = s.registerNewObjective("Main", "Main", "§6§lMCHype.net");
+		Objective obj = s.registerNewObjective("Main", "Main", "§6 >>> §lMCHype.net §r§6<<<");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 		obj.getScore("§1").setScore(11);

@@ -63,10 +63,17 @@ public class PlayerQuit implements Listener {
 			e.setQuitMessage("§c< " + p.getPlayerListName());
 		}
 		
-		for (Player ps : Bukkit.getOnlinePlayers()) {
-			ps.setScoreboard(Util.getBaseScoreboard(ps));
-			Util.updateTab(ps);
-		}
+		Bukkit.getScheduler().runTaskLater(Main.getMain(), new Runnable() {
+			
+			@Override
+			public void run() {
+				for (Player ps : Bukkit.getOnlinePlayers()) {
+					ps.setScoreboard(Util.getBaseScoreboard(ps));
+					Util.updateTab(ps);
+				}
+				
+			}
+		}, 1);
 		
 		if (Main.hue != null) {
 			if (Main.hue.containsKey(p.getUniqueId())) {
