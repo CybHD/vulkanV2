@@ -453,6 +453,7 @@ public class Game implements Listener {
 			Main.getMain().getServer().getConsoleSender()
 					.sendMessage(ChatColor.DARK_GREEN + ">>> Custom Crafting Recipe Enabled <<<");
 			Crafting.registerRecipe("Emerald_Sword");
+			Crafting.registerRecipe("op_apple");
 			Crafting.registerRecipe("Flesh");
 			Crafting.registerRecipe("CoalOre");
 			Crafting.registerRecipe("IronOre");

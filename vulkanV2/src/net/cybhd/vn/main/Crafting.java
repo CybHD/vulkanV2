@@ -34,20 +34,28 @@ public class Crafting {
 			Bukkit.addRecipe(recipe);
 			break;
 		/*
-		case "EmeraldBlock1":
-			list.add("§7Tier: §21");
-			ItemStack emeraldblock1 = Game.createNamedItemStack(Material.EMERALD_BLOCK, 1, "§a§lSmaragdblock", list);
-
-			NamespacedKey keyEBlock1 = new NamespacedKey(Main.getMain(), "emerald_block1");
-			ShapedRecipe recipeEBlock1 = new ShapedRecipe(keyEBlock1, emeraldblock1);
-
-			recipeEBlock1.shape("EEE", "EEE", "EEE");
-			recipeEBlock1.setIngredient('E', Material.EMERALD_BLOCK);
-
-			Bukkit.addRecipe(recipeEBlock1);
-			list.clear();
+		 * case "EmeraldBlock1": list.add("§7Tier: §21"); ItemStack emeraldblock1 =
+		 * Game.createNamedItemStack(Material.EMERALD_BLOCK, 1, "§a§lSmaragdblock",
+		 * list);
+		 * 
+		 * NamespacedKey keyEBlock1 = new NamespacedKey(Main.getMain(),
+		 * "emerald_block1"); ShapedRecipe recipeEBlock1 = new ShapedRecipe(keyEBlock1,
+		 * emeraldblock1);
+		 * 
+		 * recipeEBlock1.shape("EEE", "EEE", "EEE"); recipeEBlock1.setIngredient('E',
+		 * Material.EMERALD_BLOCK);
+		 * 
+		 * Bukkit.addRecipe(recipeEBlock1); list.clear(); break;
+		 */
+		case "op_apple":
+			ItemStack op_apple = Game.createNamedItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1, "§6Goldapfel");
+			NamespacedKey keyApple = new NamespacedKey(Main.getMain(), "apple_enchanted");
+			ShapedRecipe recipeApple = new ShapedRecipe(keyApple, op_apple);
+			recipeApple.shape("GGG", "GAG", "GGG");
+			recipeApple.setIngredient('G', Material.GOLD_BLOCK);
+			recipeApple.setIngredient('A', Material.APPLE);
+			Bukkit.addRecipe(recipeApple);
 			break;
-	*/
 		case "Flesh":
 			ItemStack Leather = new ItemStack(Material.LEATHER);
 
@@ -143,7 +151,7 @@ public class Crafting {
 
 			Bukkit.addRecipe(recipeEmeraldOre);
 			break;
-			
+
 		default:
 			break;
 		}
