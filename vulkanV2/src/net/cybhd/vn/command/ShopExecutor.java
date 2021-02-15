@@ -27,7 +27,11 @@ public class ShopExecutor implements CommandExecutor {
 							Eco.sell(p.getInventory().getItemInMainHand().getType(), p);
 						}
 						p.sendMessage("§6Item erfolgreich im Shop verkauft");
+					} else {
+						p.sendMessage("§6Dieses Item wird nicht im Shop gehandelt");
 					}
+				} else {
+					p.sendMessage("§cDu hast kein gültiges Item in der Hand");
 				}
 			}
 		} else if (args.length == 3) {
