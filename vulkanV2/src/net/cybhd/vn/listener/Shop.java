@@ -142,14 +142,14 @@ public class Shop implements Listener {
 			if (slot <= 54) {
 				if (e.getClick() == ClickType.LEFT) {
 					if (!invFull(p)) {
-						Eco.Buy(slot, p);
+						Eco.buy(slot, p);
 					} else {
 						p.sendMessage("§6Dein Inventar ist voll");
 					}
 				} else if (e.getClick() == ClickType.RIGHT) {
 					if (e.getCurrentItem() != null) {
 						if (p.getInventory().contains(e.getCurrentItem().getType())) {
-							Eco.Sell(slot, p);
+							Eco.sell(slot, p);
 						}
 					}
 				}
@@ -161,9 +161,34 @@ public class Shop implements Listener {
 	public boolean invFull(Player p) { // Funktioniert Gut!
 		return p.getInventory().firstEmpty() == -1;
 	}
-	
+
 	public static boolean isValidItem(ItemStack i) {
-		if (i.getType() == Material.DIRT) {
+		if (i.getType() == Material.DIRT || i.getType() == Material.COARSE_DIRT || i.getType() == Material.PODZOL
+				|| i.getType() == Material.GRASS_BLOCK || i.getType() == Material.STONE
+				|| i.getType() == Material.GRANITE || i.getType() == Material.DIORITE
+				|| i.getType() == Material.ANDESITE || i.getType() == Material.COBBLESTONE
+				|| i.getType() == Material.OAK_LOG || i.getType() == Material.SPRUCE_LOG
+				|| i.getType() == Material.BIRCH_LOG || i.getType() == Material.JUNGLE_LOG
+				|| i.getType() == Material.ACACIA_LOG || i.getType() == Material.DARK_OAK_LOG
+				|| i.getType() == Material.OAK_LEAVES || i.getType() == Material.SPRUCE_LEAVES
+				|| i.getType() == Material.BIRCH_LEAVES || i.getType() == Material.JUNGLE_LEAVES
+				|| i.getType() == Material.ACACIA_LEAVES || i.getType() == Material.DARK_OAK_LEAVES
+				|| i.getType() == Material.NOTE_BLOCK || i.getType() == Material.POWERED_RAIL
+				|| i.getType() == Material.DETECTOR_RAIL || i.getType() == Material.NAME_TAG
+				|| i.getType() == Material.PISTON || i.getType() == Material.COBWEB || i.getType() == Material.TNT
+				|| i.getType() == Material.ENCHANTING_TABLE || i.getType() == Material.ENDER_CHEST
+				|| i.getType() == Material.LILY_PAD || i.getType() == Material.STONE_BRICKS
+				|| i.getType() == Material.MOSSY_STONE_BRICKS || i.getType() == Material.CRACKED_STONE_BRICKS
+				|| i.getType() == Material.CHISELED_STONE_BRICKS || i.getType() == Material.SMOOTH_STONE
+				|| i.getType() == Material.SAND || i.getType() == Material.SANDSTONE || i.getType() == Material.RED_SAND
+				|| i.getType() == Material.RED_SANDSTONE || i.getType() == Material.END_STONE
+				|| i.getType() == Material.END_STONE_BRICKS || i.getType() == Material.ENDER_PEARL
+				|| i.getType() == Material.ENDER_EYE || i.getType() == Material.DRAGON_HEAD
+				|| i.getType() == Material.STRING || i.getType() == Material.FEATHER
+				|| i.getType() == Material.WRITABLE_BOOK || i.getType() == Material.GUNPOWDER
+				|| i.getType() == Material.RABBIT_FOOT || i.getType() == Material.FIREWORK_ROCKET
+				|| i.getType() == Material.SNOWBALL || i.getType() == Material.EXPERIENCE_BOTTLE
+				|| i.getType() == Material.FIRE_CHARGE) {
 			return true;
 		}
 		return false;

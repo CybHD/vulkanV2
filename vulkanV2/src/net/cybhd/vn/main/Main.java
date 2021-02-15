@@ -85,6 +85,7 @@ public class Main extends JavaPlugin {
 
 		Messenger messenger = Bukkit.getMessenger();
 		messenger.registerIncomingPluginChannel(this, "minecraft:brand", new BrandPluginMessageListener());
+		messenger.registerOutgoingPluginChannel(this, "BungeeCord");
 
 		Game.Startup();
 

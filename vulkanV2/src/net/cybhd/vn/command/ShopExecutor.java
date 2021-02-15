@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.cybhd.vn.listener.Shop;
+import net.cybhd.vn.main.Eco;
 import net.cybhd.vn.main.Game;
 
 public class ShopExecutor implements CommandExecutor {
@@ -21,7 +22,10 @@ public class ShopExecutor implements CommandExecutor {
 				if (p.getInventory().getItemInMainHand() != null
 						|| p.getInventory().getItemInMainHand().getType() != Material.AIR) {
 					if (Shop.isValidItem(p.getInventory().getItemInMainHand())) {
-						p.getInventory().remove(p.getInventory().getItemInMainHand());
+						for (int i = 0; i < p.getInventory().getItemInMainHand().getAmount(); i++) {
+							Eco.sell(p.getInventory().getItemInMainHand().getType(), p);
+						}
+						p.sendMessage("§6Item erfolgreich im Shop verkauft");
 					}
 				}
 			}
