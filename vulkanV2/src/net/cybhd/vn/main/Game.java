@@ -855,6 +855,19 @@ public class Game implements Listener {
 			}
 		}
 	}
+	
+	public static void removeItem(Player p, Material mat, int amount) {
+		for (int i = 0; i < p.getInventory().getSize(); i++) {
+			ItemStack itm = p.getInventory().getItem(i);
+			if (itm != null && itm.getType().equals(mat)) {
+				int amt = itm.getAmount() - amount;
+				itm.setAmount(amt);
+				p.getInventory().setItem(i, amt > 0 ? itm : null);
+				p.updateInventory();
+				break;
+			}
+		}
+	}
 
 	public static ItemStack createNamedItemStack(Material m, Integer amount, String name) {
 		ItemStack i = new ItemStack(m, amount);

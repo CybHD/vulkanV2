@@ -37,6 +37,7 @@ public class Eco {
 		Double amount = Math.round(100.0 * stats.getDouble(".balance")) / 100.0;
 		return amount;
 	}
+
 	public static void addOfflinePlayer(String name, Double amount) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + name + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
@@ -52,7 +53,7 @@ public class Eco {
 			Util.updateTab(ps);
 		}
 	}
-	
+
 	public static void add(Player p, Double amount, boolean silent) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
@@ -71,7 +72,7 @@ public class Eco {
 			Util.updateTab(ps);
 		}
 	}
-	
+
 	public static void add(Player p, Double amount) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
@@ -123,7 +124,7 @@ public class Eco {
 	}
 
 	public static void buy(int slot, Player p) {
-		
+
 		switch (slot) {
 		case 0:
 			if (Eco.get(p) >= Shop.price_dirt_buy) {
@@ -206,7 +207,7 @@ public class Eco {
 				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 			}
 			break;
-			//END OF FIRST ITEM SHOP ROW
+		// END OF FIRST ITEM SHOP ROW
 		case 9:
 			if (Eco.get(p) >= Shop.price_oak_buy) {
 				Eco.remove(p, Shop.price_oak_buy);
@@ -288,7 +289,7 @@ public class Eco {
 				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 			}
 			break;
-			//END OF SECOND ITEM SHOP ROW
+		// END OF SECOND ITEM SHOP ROW
 		case 18:
 			if (Eco.get(p) >= Shop.price_jungleleaves_buy) {
 				Eco.remove(p, Shop.price_jungleleaves_buy);
@@ -452,7 +453,7 @@ public class Eco {
 				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 			}
 			break;
-		//END OF FOURTH ITEM SHOP ROW
+		// END OF FOURTH ITEM SHOP ROW
 		case 36:
 			if (Eco.get(p) >= Shop.price_sand_buy) {
 				Eco.remove(p, Shop.price_sand_buy);
@@ -534,7 +535,7 @@ public class Eco {
 				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 			}
 			break;
-		//END OF FITH ROW
+		// END OF FITH ROW
 		case 45:
 			if (Eco.get(p) >= Shop.price_string_buy) {
 				Eco.remove(p, Shop.price_string_buy);
@@ -617,7 +618,7 @@ public class Eco {
 			}
 			break;
 		}
-		//Log Transaction
+		// Log Transaction
 		String time = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
 		File fstats = new File("plugins/vulkan/SHOP.yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
@@ -628,225 +629,171 @@ public class Eco {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void sell(Material m, Player p) {
-		
+
+	public static void sell(Material m, Player p, int amount) {
+
 		switch (m) {
 		case DIRT:
-			Game.removeItem(p, Material.DIRT);
-			Eco.add(p, Shop.price_dirt_sell, true);
+			Eco.add(p, Shop.price_dirt_sell * amount, true);
 			break;
 		case COARSE_DIRT:
-			Game.removeItem(p, Material.COARSE_DIRT);
-			Eco.add(p, Shop.price_coarsedirt_sell, true);
+			Eco.add(p, Shop.price_coarsedirt_sell * amount, true);
 			break;
 		case PODZOL:
-			Game.removeItem(p, Material.PODZOL);
-			Eco.add(p, Shop.price_podzol_sell, true);
+			Eco.add(p, Shop.price_podzol_sell * amount, true);
 			break;
 		case GRASS_BLOCK:
-			Game.removeItem(p, Material.GRASS_BLOCK);
-			Eco.add(p, Shop.price_gras_sell, true);
+			Eco.add(p, Shop.price_gras_sell * amount, true);
 			break;
 		case STONE:
-			Game.removeItem(p, Material.STONE);
-			Eco.add(p, Shop.price_stone_sell, true);
+			Eco.add(p, Shop.price_stone_sell * amount, true);
 			break;
 		case GRANITE:
-			Game.removeItem(p, Material.GRANITE);
-			Eco.add(p, Shop.price_granit_sell, true);
+			Eco.add(p, Shop.price_granit_sell * amount, true);
 			break;
 		case DIORITE:
-			Game.removeItem(p, Material.DIORITE);
-			Eco.add(p, Shop.price_diorit_sell, true);
+			Eco.add(p, Shop.price_diorit_sell * amount, true);
 			break;
 		case ANDESITE:
-			Game.removeItem(p, Material.ANDESITE);
-			Eco.add(p, Shop.price_andesit_sell, true);
+			Eco.add(p, Shop.price_andesit_sell * amount, true);
 			break;
 		case COBBLESTONE:
-			Game.removeItem(p, Material.COBBLESTONE);
-			Eco.add(p, Shop.price_cobblestone_sell, true);
+			Eco.add(p, Shop.price_cobblestone_sell * amount, true);
 			break;
 		case OAK_LOG:
-			Game.removeItem(p, Material.OAK_LOG);
-			Eco.add(p, Shop.price_oak_sell, true);
+			Eco.add(p, Shop.price_oak_sell * amount, true);
 			break;
 		case SPRUCE_LOG:
-			Game.removeItem(p, Material.SPRUCE_LOG);
-			Eco.add(p, Shop.price_spruce_sell, true);
+			Eco.add(p, Shop.price_spruce_sell * amount, true);
 			break;
 		case BIRCH_LOG:
-			Game.removeItem(p, Material.BIRCH_LOG);
-			Eco.add(p, Shop.price_birch_sell, true);
+			Eco.add(p, Shop.price_birch_sell * amount, true);
 			break;
 		case JUNGLE_LOG:
-			Game.removeItem(p, Material.JUNGLE_LOG);
-			Eco.add(p, Shop.price_jungle_sell, true);
+			Eco.add(p, Shop.price_jungle_sell * amount, true);
 			break;
 		case ACACIA_LOG:
-			Game.removeItem(p, Material.ACACIA_LOG);
-			Eco.add(p, Shop.price_acacia_sell, true);
+			Eco.add(p, Shop.price_acacia_sell * amount, true);
 			break;
 		case DARK_OAK_LOG:
-			Game.removeItem(p, Material.DARK_OAK_LOG);
-			Eco.add(p, Shop.price_darkoak_sell, true);
+			Eco.add(p, Shop.price_darkoak_sell * amount, true);
 			break;
 		case OAK_LEAVES:
-			Game.removeItem(p, Material.OAK_LEAVES);
-			Eco.add(p, Shop.price_oakleaves_sell, true);
+			Eco.add(p, Shop.price_oakleaves_sell * amount, true);
 			break;
 		case SPRUCE_LEAVES:
-			Game.removeItem(p, Material.SPRUCE_LEAVES);
-			Eco.add(p, Shop.price_spruce_sell, true);
+			Eco.add(p, Shop.price_spruce_sell * amount, true);
 			break;
 		case BIRCH_LEAVES:
-			Game.removeItem(p, Material.BIRCH_LEAVES);
-			Eco.add(p, Shop.price_birchleaves_sell, true);
+			Eco.add(p, Shop.price_birchleaves_sell * amount, true);
 			break;
 		case JUNGLE_LEAVES:
-			Game.removeItem(p, Material.JUNGLE_LEAVES);
-			Eco.add(p, Shop.price_jungleleaves_sell, true);
+			Eco.add(p, Shop.price_jungleleaves_sell * amount, true);
 			break;
 		case ACACIA_LEAVES:
-			Game.removeItem(p, Material.ACACIA_LEAVES);
-			Eco.add(p, Shop.price_acacialeaves_sell, true);
+			Eco.add(p, Shop.price_acacialeaves_sell * amount, true);
 			break;
 		case DARK_OAK_LEAVES:
-			Game.removeItem(p, Material.DARK_OAK_LEAVES);
-			Eco.add(p, Shop.price_darkoakleaves_sell, true);
+			Eco.add(p, Shop.price_darkoakleaves_sell * amount, true);
 			break;
 		case NOTE_BLOCK:
-			Game.removeItem(p, Material.NOTE_BLOCK);
-			Eco.add(p, Shop.price_noteblock_sell, true);
+			Eco.add(p, Shop.price_noteblock_sell * amount, true);
 			break;
 		case POWERED_RAIL:
-			Game.removeItem(p, Material.POWERED_RAIL);
-			Eco.add(p, Shop.price_poweredrail_sell, true);
+			Eco.add(p, Shop.price_poweredrail_sell * amount, true);
 			break;
 		case DETECTOR_RAIL:
-			Game.removeItem(p, Material.DETECTOR_RAIL);
-			Eco.add(p, Shop.price_detectorrail_sell, true);
+			Eco.add(p, Shop.price_detectorrail_sell * amount, true);
 			break;
 		case NAME_TAG:
-			Game.removeItem(p, Material.NAME_TAG);
-			Eco.add(p, Shop.price_nametag_sell, true);
+			Eco.add(p, Shop.price_nametag_sell * amount, true);
 			break;
 		case PISTON:
-			Game.removeItem(p, Material.PISTON);
-			Eco.add(p, Shop.price_piston_sell, true);
+			Eco.add(p, Shop.price_piston_sell * amount, true);
 			break;
 		case COBWEB:
-			Game.removeItem(p, Material.COBWEB);
-			Eco.add(p, Shop.price_cobweb_sell, true);
+			Eco.add(p, Shop.price_cobweb_sell * amount, true);
 			break;
 		case TNT:
-			Game.removeItem(p, Material.TNT);
-			Eco.add(p, Shop.price_tnt_sell, true);
+			Eco.add(p, Shop.price_tnt_sell * amount, true);
 			break;
 		case ENCHANTING_TABLE:
-			Game.removeItem(p, Material.ENCHANTING_TABLE);
-			Eco.add(p, Shop.price_enchantingtable_sell, true);
+			Eco.add(p, Shop.price_enchantingtable_sell * amount, true);
 			break;
 		case ENDER_CHEST:
-			Game.removeItem(p, Material.ENDER_CHEST);
-			Eco.add(p, Shop.price_enderchest_sell, true);
+			Eco.add(p, Shop.price_enderchest_sell * amount, true);
 			break;
 		case LILY_PAD:
-			Game.removeItem(p, Material.LILY_PAD);
-			Eco.add(p, Shop.price_lilypad_sell, true);
+			Eco.add(p, Shop.price_lilypad_sell * amount, true);
 			break;
 		case STONE_BRICKS:
-			Game.removeItem(p, Material.STONE_BRICKS);
-			Eco.add(p, Shop.price_stonebricks_sell, true);
+			Eco.add(p, Shop.price_stonebricks_sell * amount, true);
 			break;
 		case MOSSY_STONE_BRICKS:
-			Game.removeItem(p, Material.MOSSY_STONE_BRICKS);
-			Eco.add(p, Shop.price_mossystonebricks_sell, true);
+			Eco.add(p, Shop.price_mossystonebricks_sell * amount, true);
 			break;
 		case CRACKED_STONE_BRICKS:
-			Game.removeItem(p, Material.CRACKED_STONE_BRICKS);
-			Eco.add(p, Shop.price_crackedstonebricks_sell, true);
+			Eco.add(p, Shop.price_crackedstonebricks_sell * amount, true);
 			break;
 		case CHISELED_STONE_BRICKS:
-			Game.removeItem(p, Material.CHISELED_STONE_BRICKS);
-			Eco.add(p, Shop.price_chiseledstonebricks_sell, true);
+			Eco.add(p, Shop.price_chiseledstonebricks_sell * amount, true);
 			break;
 		case SMOOTH_STONE:
-			Game.removeItem(p, Material.SMOOTH_STONE);
-			Eco.add(p, Shop.price_smoothstone_sell, true);
+			Eco.add(p, Shop.price_smoothstone_sell * amount, true);
 			break;
 		case SAND:
-			Game.removeItem(p, Material.SAND);
-			Eco.add(p, Shop.price_sand_sell, true);
+			Eco.add(p, Shop.price_sand_sell * amount, true);
 			break;
 		case SANDSTONE:
-			Game.removeItem(p, Material.SANDSTONE);
-			Eco.add(p, Shop.price_sandstone_sell, true);
+			Eco.add(p, Shop.price_sandstone_sell * amount, true);
 			break;
 		case RED_SAND:
-			Game.removeItem(p, Material.RED_SAND);
-			Eco.add(p, Shop.price_redsandstone_sell, true);
+			Eco.add(p, Shop.price_redsandstone_sell * amount, true);
 			break;
 		case RED_SANDSTONE:
-			Game.removeItem(p, Material.RED_SANDSTONE);
-			Eco.add(p, Shop.price_redsandstone_sell, true);
+			Eco.add(p, Shop.price_redsandstone_sell * amount, true);
 			break;
 		case END_STONE:
-			Game.removeItem(p, Material.END_STONE);
-			Eco.add(p, Shop.price_endstone_sell, true);
+			Eco.add(p, Shop.price_endstone_sell * amount, true);
 			break;
 		case END_STONE_BRICKS:
-			Game.removeItem(p, Material.END_STONE_BRICKS);
-			Eco.add(p, Shop.price_endstonebricks_sell, true);
+			Eco.add(p, Shop.price_endstonebricks_sell * amount, true);
 			break;
 		case ENDER_PEARL:
-			Game.removeItem(p, Material.ENDER_PEARL);
-			Eco.add(p, Shop.price_enderpearl_sell, true);
+			Eco.add(p, Shop.price_enderpearl_sell * amount, true);
 			break;
 		case ENDER_EYE:
-			Game.removeItem(p, Material.ENDER_EYE);
-			Eco.add(p, Shop.price_eyeofender_sell, true);
+			Eco.add(p, Shop.price_eyeofender_sell * amount, true);
 			break;
 		case DRAGON_HEAD:
-			Game.removeItem(p, Material.DRAGON_HEAD);
-			Eco.add(p, Shop.price_dragonhead_sell, true);
+			Eco.add(p, Shop.price_dragonhead_sell * amount, true);
 			break;
 		case STRING:
-			Game.removeItem(p, Material.STRING);
-			Eco.add(p, Shop.price_string_sell, true);
+			Eco.add(p, Shop.price_string_sell * amount, true);
 			break;
 		case FEATHER:
-			Game.removeItem(p, Material.FEATHER);
-			Eco.add(p, Shop.price_feather_sell, true);
+			Eco.add(p, Shop.price_feather_sell * amount, true);
 			break;
 		case WRITABLE_BOOK:
-			Game.removeItem(p, Material.WRITABLE_BOOK);
-			Eco.add(p, Shop.price_book_sell, true);
+			Eco.add(p, Shop.price_book_sell * amount, true);
 			break;
 		case GUNPOWDER:
-			Game.removeItem(p, Material.GUNPOWDER);
-			Eco.add(p, Shop.price_gunpoweder_sell, true);
+			Eco.add(p, Shop.price_gunpoweder_sell * amount, true);
 			break;
 		case RABBIT_FOOT:
-			Game.removeItem(p, Material.RABBIT_FOOT);
-			Eco.add(p, Shop.price_rabbithide_sell, true);
+			Eco.add(p, Shop.price_rabbithide_sell * amount, true);
 			break;
 		case FIREWORK_ROCKET:
-			Game.removeItem(p, Material.FIREWORK_ROCKET);
-			Eco.add(p, Shop.price_firework_sell, true);
+			Eco.add(p, Shop.price_firework_sell * amount, true);
 			break;
 		case SNOWBALL:
-			Game.removeItem(p, Material.SNOWBALL);
-			Eco.add(p, Shop.price_snowball_sell, true);
+			Eco.add(p, Shop.price_snowball_sell * amount, true);
 			break;
 		case FIRE_CHARGE:
-			Game.removeItem(p, Material.FIRE_CHARGE);
-			Eco.add(p, Shop.price_firecharge_sell, true);
+			Eco.add(p, Shop.price_firecharge_sell * amount, true);
 			break;
 		case EXPERIENCE_BOTTLE:
-			Game.removeItem(p, Material.EXPERIENCE_BOTTLE);
-			Eco.add(p, Shop.price_expbottle_sell, true);
+			Eco.add(p, Shop.price_expbottle_sell * amount, true);
 			break;
 		default:
 			break;
@@ -863,7 +810,7 @@ public class Eco {
 	}
 
 	public static void sell(int slot, Player p) {
-		
+
 		switch (slot) {
 		case 0:
 			Game.removeItem(p, Material.DIRT);
