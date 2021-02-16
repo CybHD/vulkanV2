@@ -33,6 +33,9 @@ public class PlayerInteract implements Listener {
 			}
 		}
 		*/
+		if (p.getLocation().getWorld().getName().equals("spawn")) {
+			e.setCancelled(true);
+		}
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_BLOCK) {
 			Block b = e.getClickedBlock();
 			if (!(p.getGameMode() == GameMode.CREATIVE)) {

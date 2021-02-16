@@ -263,9 +263,15 @@ public class Main extends JavaPlugin {
 	}
 
 	public static Location getSpawnLoc() {
-		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), 607.5, 24, 116.5, -90, 0);
+		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), 9.5, 115, -9.5, -45, 0);
 		return spawnLOC;
 	}
+	
+//	OLD Spawn Loc
+//	public static Location getSpawnLoc() {
+//		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), 607.5, 24, 116.5, -90, 0);
+//		return spawnLOC;
+//	}
 
 	public static Location getSpawnLocByConfig() {
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(Game.getConfigFile());

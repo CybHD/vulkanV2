@@ -17,7 +17,7 @@ public class HomeExecutor implements CommandExecutor {
 		Player p = (Player) sender;
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
-		if (p.getLocation().getWorld().getName().equals("world") || p.getLocation().getWorld().getName().equals("spawn")) {
+		if (p.getHealth() >= 19) {
 			if (stats.isSet("Home.World")) {
 				if (Bukkit.getWorld(stats.getString("Home.World")).getName().equals("world")) {
 					Location loc = new Location(Bukkit.getWorld(stats.getString("Home.World")),
@@ -35,7 +35,7 @@ public class HomeExecutor implements CommandExecutor {
 				p.sendMessage("§cDu hast noch kein Home");
 			}
 		} else {
-			p.sendMessage("§6Du kannst §c/home §6nur in der normalen Welt oder am Warp benutzen");
+			p.sendMessage("§6Du kannst §c/home §6nur benutzen wenn du volle Leben hast");
 		}
 		return false;
 	}
