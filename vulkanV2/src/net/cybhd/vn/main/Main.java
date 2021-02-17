@@ -100,7 +100,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new PlayerLogin(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerQuit(), this);
-		// Bukkit.getPluginManager().registerEvents(new PlayerMove(), this);
+		//Bukkit.getPluginManager().registerEvents(new PlayerMove(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerChunkChange(), this);
 		Bukkit.getPluginManager().registerEvents(new PortalEnter(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
@@ -263,7 +263,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public static Location getSpawnLoc() {
-		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), 9.5, 115, -9.5, -45, 0);
+		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), 9.5, 115, -9.5, 50, 0);
 		return spawnLOC;
 	}
 	

@@ -18,23 +18,12 @@ public class PlayerInteract implements Listener {
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		/*
-		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if (p.getWorld().getName().equals("world")) {
-				if (e.getClickedBlock().getBlockData() instanceof org.bukkit.block.data.type.Bed) {
+		if (p.getLocation().getWorld().getName().equals("spawn")) {
+			if (!(p.hasPermission(Game.getAdminPermission()) && p.getGameMode() == GameMode.CREATIVE)) {
+				if (e.getAction() != Action.RIGHT_CLICK_AIR) {
 					e.setCancelled(true);
-					p.setBedSpawnLocation(e.getClickedBlock().getLocation(), true);
-					p.sendMessage("§6Spawnpunkt gesetzt");
-					if (p.getWorld().getTime() >= 12000) {
-						p.getWorld().setTime(p.getWorld().getFullTime() + 12000);
-						p.getWorld().setClearWeatherDuration(20 * 1 * 60 * 15);
-					}
 				}
 			}
-		}
-		*/
-		if (p.getLocation().getWorld().getName().equals("spawn")) {
-			e.setCancelled(true);
 		}
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_BLOCK) {
 			Block b = e.getClickedBlock();
