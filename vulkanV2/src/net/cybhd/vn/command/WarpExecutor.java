@@ -19,14 +19,19 @@ public class WarpExecutor implements CommandExecutor {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
 			if (p.getLocation().getWorld() == Main.getSpawnLoc().getWorld()) {
-				File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
-				YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
-				if (stats.isSet("LastLocation.World")) {
-					p.teleport(new Location(Bukkit.getWorld(stats.getString("LastLocation.World")),
-							stats.getDouble("LastLocation.X"), stats.getDouble("LastLocation.Y"),
-							stats.getDouble("LastLocation.Z"), (float) stats.getDouble("LastLocation.Yaw") , (float) stats.getDouble("LastLocation.Pitch")));
+				if (p.getHealth() >= 14) {
+					File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
+					YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
+					if (stats.isSet("LastLocation.World")) {
+						p.teleport(new Location(Bukkit.getWorld(stats.getString("LastLocation.World")),
+								stats.getDouble("LastLocation.X"), stats.getDouble("LastLocation.Y"),
+								stats.getDouble("LastLocation.Z"), (float) stats.getDouble("LastLocation.Yaw"),
+								(float) stats.getDouble("LastLocation.Pitch")));
+					} else {
+						p.teleport(Main.getWorldLoc());
+					}
 				} else {
-					p.teleport(Main.getWorldLoc());
+					p.sendMessage("§6Du musst mehr als 14 Lebenspunkte haben um §c/warp §6benutzen zu können");
 				}
 			} else if (p.getLocation().getWorld() == Bukkit.getWorld("world")) {
 				p.teleport(Main.getSpawnLoc());

@@ -17,8 +17,9 @@ public class EntityDamage implements Listener {
 			Player p = (Player) e.getEntity();
 			if (p.getWorld() == Bukkit.getWorld("spawn") || p.getWorld().getName().equals("ice_spawn")) {
 				e.setCancelled(true);
+			} else {
+				Game.sendConsoleMSG(p.getPlayerListName() + " §6took §c" + e.getDamage() + " §7(§c" + e.getDamage() / 2 + "§7)", ChatColor.RED);
 			}
-			Game.sendConsoleMSG(p.getPlayerListName() + " §6 took §c" + e.getDamage() + " §7( " + e.getDamage() / 2 + "§7)", ChatColor.RED);
 		}
 		
 	}

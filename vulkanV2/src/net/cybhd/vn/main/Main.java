@@ -113,7 +113,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new Shop(), this);
 		Bukkit.getPluginManager().registerEvents(new Chunk(), this);
 		Bukkit.getPluginManager().registerEvents(new EntityExplode(), this);
-		Bukkit.getPluginManager().registerEvents(new EntityDeath(), this);
+		//Bukkit.getPluginManager().registerEvents(new EntityDeath(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryClick(), this);
 		Bukkit.getPluginManager().registerEvents(new ReportsExecutor(), this);
 		Bukkit.getPluginManager().registerEvents(new EntityChangeBlock(), this);
