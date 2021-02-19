@@ -13,19 +13,8 @@ import net.cybhd.vn.main.Main;
 public class PlayerPortal implements Listener {
 
 	@EventHandler
-	public void onEnter(PlayerPortalEvent e) {
+	public void onPortal(PlayerPortalEvent e) {
 		Player p = e.getPlayer();
-		if (p.getWorld().getName().equals("spawn") || p.getWorld().getName().equals("ice_spawn")) {
-			if (e.getCause() == TeleportCause.END_GATEWAY) {
-				p.teleport(Main.getWorldLoc());
-				e.setCancelled(true);
-				p.sendMessage("Test3");
-			} else  {
-				p.sendMessage("Test2");
-			}
-		} else {
-			p.sendMessage("Test1");
-		}
 	}
 
 	@EventHandler
