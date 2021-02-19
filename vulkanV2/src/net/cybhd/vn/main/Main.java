@@ -55,7 +55,6 @@ import net.cybhd.vn.listener.Chat;
 import net.cybhd.vn.listener.CraftItem;
 import net.cybhd.vn.listener.EntityChangeBlock;
 import net.cybhd.vn.listener.EntityDamage;
-import net.cybhd.vn.listener.EntityDeath;
 import net.cybhd.vn.listener.EntityExplode;
 import net.cybhd.vn.listener.EntitySpawn;
 import net.cybhd.vn.listener.InventoryClick;
@@ -263,7 +262,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public static Location getSpawnLoc() {
-		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), 9.5, 115, -9.5, 50, 0);
+		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), -2.5, 112, 0.5, -90, 0);
 		return spawnLOC;
 	}
 	
