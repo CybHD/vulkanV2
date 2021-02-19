@@ -10,15 +10,15 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import net.cybhd.vn.main.Main;
 
-public class PortalEnter implements Listener {
+public class PlayerPortal implements Listener {
 
 	@EventHandler
 	public void onEnter(PlayerPortalEvent e) {
 		Player p = (Player) e.getPlayer();
 		if (p.getWorld().getName().equals("spawn") || p.getWorld().getName().equals("ice_spawn")) {
 			if (e.getCause() == TeleportCause.END_GATEWAY) {
-				e.setCancelled(true);
 				p.teleport(Main.getWorldLoc());
+				e.setCancelled(true);
 			}
 		}
 	}

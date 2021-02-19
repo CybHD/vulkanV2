@@ -67,7 +67,7 @@ import net.cybhd.vn.listener.PlayerLogin;
 import net.cybhd.vn.listener.PlayerPreLogin;
 import net.cybhd.vn.listener.PlayerQuit;
 import net.cybhd.vn.listener.PlayerRespawn;
-import net.cybhd.vn.listener.PortalEnter;
+import net.cybhd.vn.listener.PlayerPortal;
 import net.cybhd.vn.listener.Shop;
 import net.cybhd.vn.listener.WeatherChange;
 
@@ -101,7 +101,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new PlayerQuit(), this);
 		//Bukkit.getPluginManager().registerEvents(new PlayerMove(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerChunkChange(), this);
-		Bukkit.getPluginManager().registerEvents(new PortalEnter(), this);
+		Bukkit.getPluginManager().registerEvents(new PlayerPortal(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerRespawn(), this);
 		//Bukkit.getPluginManager().registerEvents(new PlayerBedEnter(), this);
