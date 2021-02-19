@@ -1,20 +1,16 @@
 package net.cybhd.vn.listener;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-
-import net.cybhd.vn.main.Main;
 
 public class PlayerPortal implements Listener {
 
 	@EventHandler
 	public void onPortal(PlayerPortalEvent e) {
-		Player p = e.getPlayer();
+		
 	}
 
 	@EventHandler

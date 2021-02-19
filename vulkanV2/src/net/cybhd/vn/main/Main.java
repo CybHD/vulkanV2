@@ -56,6 +56,7 @@ import net.cybhd.vn.listener.CraftItem;
 import net.cybhd.vn.listener.EntityChangeBlock;
 import net.cybhd.vn.listener.EntityDamage;
 import net.cybhd.vn.listener.EntityExplode;
+import net.cybhd.vn.listener.EntityPortal;
 import net.cybhd.vn.listener.EntitySpawn;
 import net.cybhd.vn.listener.InventoryClick;
 import net.cybhd.vn.listener.PlayerChunkChange;
@@ -112,6 +113,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new Shop(), this);
 		Bukkit.getPluginManager().registerEvents(new Chunk(), this);
 		Bukkit.getPluginManager().registerEvents(new EntityExplode(), this);
+		Bukkit.getPluginManager().registerEvents(new EntityPortal(), this);
 		//Bukkit.getPluginManager().registerEvents(new EntityDeath(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryClick(), this);
 		Bukkit.getPluginManager().registerEvents(new ReportsExecutor(), this);
