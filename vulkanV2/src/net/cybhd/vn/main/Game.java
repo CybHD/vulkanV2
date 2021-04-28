@@ -878,6 +878,11 @@ public class Game implements Listener {
 		}
 	}
 	
+	public static Boolean containsNewerItems(Player p) {
+		// check if player has items in inventory which are 1.16.5 upwards
+		return false;
+	}
+	
 	public static void removeItem(Player p, Material mat, int amount) {
 		for (int i = 0; i < p.getInventory().getSize(); i++) {
 			ItemStack itm = p.getInventory().getItem(i);

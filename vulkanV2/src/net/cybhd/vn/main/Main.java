@@ -291,4 +291,10 @@ public class Main extends JavaPlugin {
 		Location worldLOC = new Location(Bukkit.getWorld("world"), 104.5, 66, -6.5, 180, 0);
 		return worldLOC;
 	}
+	
+	//TODO fill correct location
+	public static Location get117Loc() {
+		Location worldLOC = new Location(Bukkit.getWorld("117"), 0, 80, 0, 0, 0);
+		return worldLOC;
+	}
 }

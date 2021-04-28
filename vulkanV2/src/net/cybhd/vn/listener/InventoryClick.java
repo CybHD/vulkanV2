@@ -97,7 +97,17 @@ public class InventoryClick implements Listener {
 				return;
 			}
 			if (e.getRawSlot() == 1) {
+				if (p.getWorld().getName().equals("world")) {
+					p.sendMessage("§cDu bist bereits in dieser Welt");
+					return;
+				}
 				
+				if (Game.containsNewerItems(p)) {
+					p.sendMessage("§cDu hast Items die zu neu für die Version sind");
+					return;
+				}
+				
+				p.teleport(Main.getWorldLoc());
 				return;
 			}
 			if (e.getRawSlot() == 4) {
@@ -133,7 +143,11 @@ public class InventoryClick implements Listener {
 				return;
 			}
 			if (e.getRawSlot() == 7) {
-				
+				if (p.getWorld().getName().equals("117")) {
+					p.sendMessage("§cDu bist bereits in dieser Welt");
+					return;
+				}
+				p.teleport(Main.get117Loc());
 				return;
 			}
 		}
