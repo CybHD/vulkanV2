@@ -16,15 +16,16 @@ public class PlayerLogin implements Listener {
 	@EventHandler
 	public void onLogin(PlayerLoginEvent e) {
 		Player p = e.getPlayer();
+		String uuid = p.getUniqueId().toString();
 		
 		String url = "jdbc:mysql://mchype.net:3306/mchype?autoReconnect=true&useSSL=false";
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			Connection conn = DriverManager.getConnection(url, "mchype", "G4353Bo*/]]WaSz6");
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE mc_uuid = " + p.getUniqueId().toString());
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE mc_uuid = " + uuid);
 			if (rs.next() == false) {
-				p.sendMessage("§6Dein Minecraft Account §c" + p.getName() + " §7(§c" +p.getUniqueId().toString() + " §7) §c wurde noch nicht mit einem MCHype Account verbunden");
+				p.sendMessage("§6Dein Minecraft Account §c" + p.getName() + " §7(§c" + uuid + " §7) §c wurde noch nicht mit einem MCHype Account verbunden");
 			} else {
 				do {
 					String mc_verified = rs.getString("mc_verified");
