@@ -90,44 +90,52 @@ public class InventoryClick implements Listener {
 		if (e.getView().getTitle().equals("§6Arbeitsamt")) {
 			e.setCancelled(true);
 		}
-		if(e.getView().getTitle().equals("§l§6WARP")) {
-				e.setCancelled(true);
-				// TODO
-				// - Lebensabfrage
-				//
-				if (e.getRawSlot() == 1) {
-					
-				}
-				if (e.getRawSlot() == 4) {
-					File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
-					YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
-					if (p.getWorld().getName().equals("spawn")) {
-						if (stats.isSet("LastLocation.World")) {
+		if (e.getView().getTitle().equals("§l§6WARP")) {
+			e.setCancelled(true);
+			if (p.getHealth() >= 14) {
+				p.sendMessage("§cDu hast nicht genug Leben");
+				return;
+			}
+			if (e.getRawSlot() == 1) {
+				
+				return;
+			}
+			if (e.getRawSlot() == 4) {
+				File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
+				YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
+				if (p.getWorld().getName().equals("spawn")) {
+					if (stats.isSet("LastLocation.World")) {
+						if (stats.getString("LastLocation.World").equals("spawn")) {
+							p.teleport(Main.getWorldLoc());
+						} else {
 							p.teleport(new Location(Bukkit.getWorld(stats.getString("LastLocation.World")),
 									stats.getDouble("LastLocation.X"), stats.getDouble("LastLocation.Y"),
 									stats.getDouble("LastLocation.Z"), (float) stats.getDouble("LastLocation.Yaw"),
 									(float) stats.getDouble("LastLocation.Pitch")));
-						} else {
-							p.teleport(Main.getWorldLoc());
 						}
 					} else {
-						stats.set("LastLocation.World", p.getLocation().getWorld().getName());
-						stats.set("LastLocation.X", p.getLocation().getX());
-						stats.set("LastLocation.Y", p.getLocation().getY());
-						stats.set("LastLocation.Z", p.getLocation().getZ());
-						stats.set("LastLocation.Yaw", p.getLocation().getYaw());
-						stats.set("LastLocation.Pitch", p.getLocation().getPitch());
-						try {
-							stats.save(fstats);
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-						p.teleport(Main.getSpawnLoc());
+						p.teleport(Main.getWorldLoc());
 					}
+				} else {
+					stats.set("LastLocation.World", p.getLocation().getWorld().getName());
+					stats.set("LastLocation.X", p.getLocation().getX());
+					stats.set("LastLocation.Y", p.getLocation().getY());
+					stats.set("LastLocation.Z", p.getLocation().getZ());
+					stats.set("LastLocation.Yaw", p.getLocation().getYaw());
+					stats.set("LastLocation.Pitch", p.getLocation().getPitch());
+					try {
+						stats.save(fstats);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					p.teleport(Main.getSpawnLoc());
 				}
-				if (e.getRawSlot() == 7) {
-					
-				}
+				return;
+			}
+			if (e.getRawSlot() == 7) {
+				
+				return;
+			}
 		}
 		if (e.getView().getTitle().equals("§6Auktionshaus")) {
 			File fauction = new File("plugins/vulkan/auction.yml");
