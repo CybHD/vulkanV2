@@ -16,22 +16,23 @@ public class PlayerLogin implements Listener {
 	@EventHandler
 	public void onLogin(PlayerLoginEvent e) {
 		Player p = e.getPlayer();
-		String uuid = p.getUniqueId().toString().replace("-", "");
-		
+		String uuid = p.getUniqueId().toString();
 		String url = "jdbc:mysql://mchype.net:3306/mchype?autoReconnect=true&useSSL=false";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			Connection conn = DriverManager.getConnection(url, "mchype", "G4353Bo*/]]WaSz6");
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE mc_uuid = " + uuid);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE mc_uuid = '" + uuid + "'");
 			if (rs.next() == false) {
-				p.sendMessage("§6Dein Minecraft Account §c" + p.getName() + " §7(§c" + uuid + " §7) §c wurde noch nicht mit einem MCHype Account verbunden");
+				e.disallow(Result.KICK_OTHER, "§6Dein Minecraft Account §c" + p.getName() + " §7(§c" + uuid
+						+ "§7) §6wurde noch nicht mit einem MCHype Account verbunden \n §aGehe auf MCHype.net um dir einen Account zu erstellen");
 			} else {
 				do {
 					String mc_verified = rs.getString("mc_verified");
 					// prüfen ob minecraft account bereits verifiziert ist
 					if (!mc_verified.equals("true")) {
-						e.disallow(Result.KICK_OTHER, "§6Erstelle dir auf §cMCHype.net §6einen Account um dem Server beitreten zu können");
+						e.disallow(Result.KICK_OTHER,
+								"§c/verify 'key' §6um deinen MCHype Account zu verifizieren");
 					}
 				} while (rs.next());
 			}
