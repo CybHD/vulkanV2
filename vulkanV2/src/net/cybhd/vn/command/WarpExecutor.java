@@ -13,6 +13,10 @@ public class WarpExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
+			if (!p.getWorld().getName().equals("world") && !p.getWorld().getName().equals("spawn") && !p.getWorld().getName().equals("117")) {
+				p.sendMessage("§cDu kannst /warp hier nicht benutzen");
+				return true;
+			}
 			p.openInventory(Game.getWarpInv(p));
 			/*
 			if (p.getLocation().getWorld() == Main.getSpawnLoc().getWorld()) {

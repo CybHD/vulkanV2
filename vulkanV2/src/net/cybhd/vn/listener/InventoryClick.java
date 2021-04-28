@@ -92,7 +92,7 @@ public class InventoryClick implements Listener {
 		}
 		if (e.getView().getTitle().equals("§l§6WARP")) {
 			e.setCancelled(true);
-			if (p.getHealth() >= 14) {
+			if (!(p.getHealth() >= 14)) {
 				p.sendMessage("§cDu hast nicht genug Leben");
 				return;
 			}
