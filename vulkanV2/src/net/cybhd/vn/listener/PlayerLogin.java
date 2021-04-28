@@ -16,7 +16,7 @@ public class PlayerLogin implements Listener {
 	@EventHandler
 	public void onLogin(PlayerLoginEvent e) {
 		Player p = e.getPlayer();
-		String uuid = p.getUniqueId().toString();
+		String uuid = p.getUniqueId().toString().replace("-", "");
 		
 		String url = "jdbc:mysql://mchype.net:3306/mchype?autoReconnect=true&useSSL=false";
 		try {
