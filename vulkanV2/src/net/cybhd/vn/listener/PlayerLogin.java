@@ -31,8 +31,7 @@ public class PlayerLogin implements Listener {
 					String mc_verified = rs.getString("mc_verified");
 					// prüfen ob minecraft account bereits verifiziert ist
 					if (!mc_verified.equals("true")) {
-						e.disallow(Result.KICK_OTHER,
-								"§c/verify 'key' §6um deinen MCHype Account zu verifizieren");
+						e.disallow(Result.KICK_OTHER, "§c/verify 'key' §6um deinen MCHype Account zu verifizieren");
 					}
 				} while (rs.next());
 			}

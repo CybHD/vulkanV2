@@ -83,9 +83,11 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 
+		
 		Messenger messenger = Bukkit.getMessenger();
-		messenger.registerIncomingPluginChannel(this, "minecraft:brand", new BrandPluginMessageListener());
+		//messenger.registerIncomingPluginChannel(this, "minecraft:brand", new BrandPluginMessageListener());
 		messenger.registerOutgoingPluginChannel(this, "BungeeCord");
+		
 
 		Game.Startup();
 
