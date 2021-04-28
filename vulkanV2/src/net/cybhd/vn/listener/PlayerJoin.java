@@ -140,8 +140,8 @@ public class PlayerJoin implements Listener {
 
 		p.spigot().sendMessage(tc3);
 		
-		Util u = new Util();
-		u.sendGitMSG(p);
+		//Util u = new Util();
+		//u.sendGitMSG(p);
 
 		Ability.set(p);
 		

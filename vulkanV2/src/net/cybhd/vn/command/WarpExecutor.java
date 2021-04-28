@@ -1,16 +1,11 @@
 package net.cybhd.vn.command;
 
-import java.io.File;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import net.cybhd.vn.main.Main;
+import net.cybhd.vn.main.Game;
 
 public class WarpExecutor implements CommandExecutor {
 
@@ -18,6 +13,8 @@ public class WarpExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
+			p.openInventory(Game.getWarpInv(p));
+			/*
 			if (p.getLocation().getWorld() == Main.getSpawnLoc().getWorld()) {
 				if (p.getHealth() >= 14) {
 					File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
@@ -38,6 +35,7 @@ public class WarpExecutor implements CommandExecutor {
 			} else {
 				p.sendMessage("§cWarp funktioniert nur in der Spawn und normalen Welt");
 			}
+			*/
 		}
 		return false;
 	}

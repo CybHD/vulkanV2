@@ -76,7 +76,15 @@ public class Game implements Listener {
 	public static void sendPremiumReqMSG(Player p) {
 		p.sendMessage("§cFür dieses Feature brauchst du §6§lPremium");
 	}
-
+	
+	public static String COLOR_PLAYER = "§2";
+	public static String COLOR_PREMIUM = "§6";
+	public static String COLOR_STREAMER = "§3";
+	public static String COLOR_YOUTBER = "§5";
+	public static String COLOR_SUPPORTER = "§9";
+	public static String COLOR_MODERATOR = "§c";
+	public static String COLOR_ADMIN = "§4";
+	
 	public static String getPrefix() {
 		String prefix = "§7[§l§6vulkan§4V2§r§7] ";
 		return prefix;
@@ -650,6 +658,20 @@ public class Game implements Listener {
 		 * §7Gewöhnlich §aSelten §9Sehr Selten §5§lEpisch §e§lLEGENDÄR
 		 */
 		p.openInventory(shop);
+	}
+	
+	public static Inventory getWarpInv(Player p) {
+		String world = p.getWorld().getName();
+		
+		Inventory warp = Bukkit.createInventory(null, 9, "§l§6WARP");
+		warp.setItem(1, Game.createNamedItemStack(Material.DANDELION, 1, "§e1.16"));
+		warp.setItem(4, Game.createNamedItemStack(Material.ALLIUM, 1, "§aWarp"));
+		warp.setItem(7, Game.createNamedItemStack(Material.POPPY, 1, "§c1.17"));
+		
+		if (world.equalsIgnoreCase("world")) {
+			//wenn klick auf mittlere blume dann teleport zwischen spawn und lastlocation bzw. wenn man world ist dann loc als lastloc speichern und zu warp teleportieren
+		}
+		return warp;
 	}
 
 	public static void openShopInv(Player p, int j) {
