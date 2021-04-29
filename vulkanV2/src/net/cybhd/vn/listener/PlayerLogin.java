@@ -28,6 +28,11 @@ public class PlayerLogin implements Listener {
 						+ "§7) §6wurde noch nicht mit einem MCHype Account verbunden \n §aGehe auf MCHype.net um dir einen Account zu erstellen");
 			} else {
 				do {
+					if (rs.getString("mc_verified") == null) {
+						e.disallow(Result.KICK_OTHER, "§c/verify 'key' §6um deinen MCHype Account zu verifizieren");
+						return;
+					}
+					
 					String mc_verified = rs.getString("mc_verified");
 					// prüfen ob minecraft account bereits verifiziert ist
 					if (!mc_verified.equals("true")) {
