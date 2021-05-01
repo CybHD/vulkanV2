@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 
+import net.cybhd.vn.main.Game;
+
 public class PlayerLogin implements Listener {
 
 	@EventHandler
@@ -32,12 +34,13 @@ public class PlayerLogin implements Listener {
 						e.disallow(Result.KICK_OTHER, "§c/verify 'key' §6um deinen MCHype Account zu verifizieren");
 						return;
 					}
-					
 					String mc_verified = rs.getString("mc_verified");
-					// prüfen ob minecraft account bereits verifiziert ist
+					// prüfen ob minecraft account verifiziert ist
 					if (!mc_verified.equals("true")) {
 						e.disallow(Result.KICK_OTHER, "§c/verify 'key' §6um deinen MCHype Account zu verifizieren");
+						return;
 					}
+					Game.setUsername(p, rs.getString("username"));
 				} while (rs.next());
 			}
 			conn.close();

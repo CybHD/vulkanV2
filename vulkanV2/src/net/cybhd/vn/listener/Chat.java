@@ -30,27 +30,27 @@ public class Chat implements Listener {
 		}
 		if (Clan.isMember(p)) {
 			if (p.hasPermission(Game.getAdminPermission())) {
-				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§4" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§4" + Game.getUsername(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getModPermission())) {
-				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§c" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§c" + Game.getUsername(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getSupPermission())) {
-				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§9" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§9" + Game.getUsername(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getPremPermission())) {
-				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§6" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§6" + Game.getUsername(p) + " §e> §7" + msg);
 			} else {
-				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§2" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§2" + Game.getUsername(p) + " §e> §7" + msg);
 			}
 		} else {
 			if (p.hasPermission(Game.getAdminPermission())) {
-				e.setFormat("§4" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§4" + Game.getUsername(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getModPermission())) {
-				e.setFormat("§c" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§c" + Game.getUsername(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getSupPermission())) {
-				e.setFormat("§9" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§9" + Game.getUsername(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getPremPermission())) {
-				e.setFormat("§6" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§6" + Game.getUsername(p) + " §e> §7" + msg);
 			} else {
-				e.setFormat("§2" + p.getName() + " §e> §7" + msg);
+				e.setFormat("§2" + Game.getUsername(p) + " §e> §7" + msg);
 			}
 		}
 

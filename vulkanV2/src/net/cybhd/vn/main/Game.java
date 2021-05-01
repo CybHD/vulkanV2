@@ -883,6 +883,23 @@ public class Game implements Listener {
 		return false;
 	}
 	
+	public static String getUsername(Player p) {
+		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
+		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
+		return stats.getString("MCHype.Username");
+	}
+	
+	public static void setUsername(Player p, String username) {
+		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
+		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
+		stats.set("MCHype.Username", username);
+		try {
+			stats.save(fstats);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void removeItem(Player p, Material mat, int amount) {
 		for (int i = 0; i < p.getInventory().getSize(); i++) {
 			ItemStack itm = p.getInventory().getItem(i);
