@@ -127,6 +127,7 @@ public class InventoryClick implements Listener {
 						p.teleport(Main.getWorldLoc());
 					}
 				} else {
+					/*
 					stats.set("LastLocation.World", p.getLocation().getWorld().getName());
 					stats.set("LastLocation.X", p.getLocation().getX());
 					stats.set("LastLocation.Y", p.getLocation().getY());
@@ -138,6 +139,7 @@ public class InventoryClick implements Listener {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+					*/
 					p.teleport(Main.getSpawnLoc());
 				}
 				return;

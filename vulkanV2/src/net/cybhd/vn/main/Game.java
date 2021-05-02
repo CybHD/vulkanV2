@@ -889,6 +889,12 @@ public class Game implements Listener {
 		return stats.getString("MCHype.Username");
 	}
 	
+	public static String getUsernameFormatted(Player p) {
+		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
+		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
+		return stats.getString("MCHype.Username") + " §7(§e" + p.getName() +"§7)§r";
+	}
+	
 	public static void setUsername(Player p, String username) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);

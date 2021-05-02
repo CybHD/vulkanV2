@@ -85,27 +85,27 @@ public class PlayerJoin implements Listener {
 		// Player List Name
 		if (Clan.isMember(p)) {
 			if (p.hasPermission(Game.getAdminPermission())) {
-				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§4" + Game.getUsername(p));
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§4" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getModPermission())) {
-				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§c" + Game.getUsername(p));
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§c" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getSupPermission())) {
-				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§9" + Game.getUsername(p));
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§9" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getPremPermission())) {
-				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§6" + Game.getUsername(p));
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§6" + Game.getUsernameFormatted(p));
 			} else {
-				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§2" + Game.getUsername(p));
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§2" + Game.getUsernameFormatted(p));
 			}
 		} else {
 			if (p.hasPermission(Game.getAdminPermission())) {
-				p.setPlayerListName("§4" + Game.getUsername(p));
+				p.setPlayerListName("§4" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getModPermission())) {
-				p.setPlayerListName("§c" + Game.getUsername(p));
+				p.setPlayerListName("§c" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getSupPermission())) {
-				p.setPlayerListName("§9" + Game.getUsername(p));
+				p.setPlayerListName("§9" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getPremPermission())) {
-				p.setPlayerListName("§6" + Game.getUsername(p));
+				p.setPlayerListName("§6" + Game.getUsernameFormatted(p));
 			} else {
-				p.setPlayerListName("§2" + Game.getUsername(p));
+				p.setPlayerListName("§2" + Game.getUsernameFormatted(p));
 			}
 		}
 
