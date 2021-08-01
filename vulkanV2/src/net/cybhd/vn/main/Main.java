@@ -23,6 +23,7 @@ import org.bukkit.scoreboard.Objective;
 import net.cybhd.vn.ability.Ability;
 import net.cybhd.vn.command.AbilitiesExecutor;
 import net.cybhd.vn.command.AuctionExecutor;
+import net.cybhd.vn.command.BoostExecutor;
 import net.cybhd.vn.command.ClaimExecutor;
 import net.cybhd.vn.command.ClanExecutor;
 import net.cybhd.vn.command.CraftExecutor;
@@ -139,6 +140,7 @@ public class Main extends JavaPlugin {
 		this.getCommand("plot").setExecutor(new PlotExecutor());
 		this.getCommand("home").setExecutor(new HomeExecutor());
 		this.getCommand("lobby").setExecutor(new HubExecutor());
+		this.getCommand("boost").setExecutor(new BoostExecutor());
 		this.getCommand("sethome").setExecutor(new SetHomeExecutor());
 		this.getCommand("auction").setExecutor(new AuctionExecutor());
 		this.getCommand("auktion").setExecutor(new AuctionExecutor());

@@ -23,6 +23,7 @@ commands:
      claim:
      login:
      lobby:
+     boost:
      select:
      target:
      report:

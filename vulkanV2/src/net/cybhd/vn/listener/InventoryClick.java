@@ -1,7 +1,6 @@
 package net.cybhd.vn.listener;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
@@ -17,6 +16,8 @@ import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import net.cybhd.vn.main.Auction;
 import net.cybhd.vn.main.Eco;
@@ -25,6 +26,7 @@ import net.cybhd.vn.main.Main;
 
 public class InventoryClick implements Listener {
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
@@ -87,6 +89,53 @@ public class InventoryClick implements Listener {
 		if (e.getView().getTitle().contains("§cReport")) {
 			e.setCancelled(true);
 		}
+		if (e.getView().getTitle().equals("§6Boost")) {
+			e.setCancelled(true);
+			switch (e.getRawSlot()) {
+			case 1:
+				if (p.getInventory().getItemInMainHand() != null) {
+					if (p.getInventory().getItemInMainHand().getType() == Material.NETHERITE_PICKAXE) {
+						ItemStack netherritepickaxe = p.getInventory().getItemInMainHand();
+						ItemMeta meta = netherritepickaxe.getItemMeta();
+						ArrayList<String> lore = new ArrayList<String>();
+						if (meta.getLore() != null) {
+							lore = (ArrayList<String>) meta.getLore();
+							if (lore.contains("§6§lEnhanced")) {
+								p.sendMessage("§6Du hast dieses Tool bereits verbessert");
+								return;
+							}
+						}
+						lore.add("§6§lEnhanced");
+						meta.setLore(lore);
+						netherritepickaxe.setItemMeta(meta);
+					}
+				}
+				break;
+			case 10:
+				if (p.hasPotionEffect(PotionEffectType.JUMP)) {
+					p.removePotionEffect(PotionEffectType.JUMP);
+				} else {
+					p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 0, false, false));
+				}
+				break;
+			case 13:
+				if (p.hasPotionEffect(PotionEffectType.SPEED)) {
+					p.removePotionEffect(PotionEffectType.SPEED);
+				} else {
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0, false, false));
+				}
+				break;
+			case 16:
+				if (p.getMaxHealth() >= 40) {
+					p.setMaxHealth(20);
+				} else {
+					p.setMaxHealth(40);
+				}
+				break;
+			default:
+				break;
+			}
+		}
 		if (e.getView().getTitle().equals("§6Arbeitsamt")) {
 			e.setCancelled(true);
 		}
@@ -101,12 +150,12 @@ public class InventoryClick implements Listener {
 					p.sendMessage("§cDu bist bereits in dieser Welt");
 					return;
 				}
-				
+
 				if (Game.containsNewerItems(p)) {
 					p.sendMessage("§cDu hast Items die zu neu für die Version sind");
 					return;
 				}
-				
+
 				p.teleport(Main.getWorldLoc());
 				return;
 			}
@@ -128,29 +177,28 @@ public class InventoryClick implements Listener {
 					}
 				} else {
 					/*
-					stats.set("LastLocation.World", p.getLocation().getWorld().getName());
-					stats.set("LastLocation.X", p.getLocation().getX());
-					stats.set("LastLocation.Y", p.getLocation().getY());
-					stats.set("LastLocation.Z", p.getLocation().getZ());
-					stats.set("LastLocation.Yaw", p.getLocation().getYaw());
-					stats.set("LastLocation.Pitch", p.getLocation().getPitch());
-					try {
-						stats.save(fstats);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-					*/
+					 * stats.set("LastLocation.World", p.getLocation().getWorld().getName());
+					 * stats.set("LastLocation.X", p.getLocation().getX());
+					 * stats.set("LastLocation.Y", p.getLocation().getY());
+					 * stats.set("LastLocation.Z", p.getLocation().getZ());
+					 * stats.set("LastLocation.Yaw", p.getLocation().getYaw());
+					 * stats.set("LastLocation.Pitch", p.getLocation().getPitch()); try {
+					 * stats.save(fstats); } catch (IOException e1) { e1.printStackTrace(); }
+					 */
 					p.teleport(Main.getSpawnLoc());
 				}
 				return;
 			}
 			if (e.getRawSlot() == 7) {
+				//TODO
+				/*
 				if (p.getWorld().getName().equals("117")) {
 					p.sendMessage("§cDu bist bereits in dieser Welt");
 					return;
 				}
 				p.teleport(Main.get117Loc());
 				return;
+				*/
 			}
 		}
 		if (e.getView().getTitle().equals("§6Auktionshaus")) {

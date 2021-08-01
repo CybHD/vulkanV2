@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -76,7 +77,7 @@ public class Game implements Listener {
 	public static void sendPremiumReqMSG(Player p) {
 		p.sendMessage("§cFür dieses Feature brauchst du §6§lPremium");
 	}
-	
+
 	public static String COLOR_PLAYER = "§2";
 	public static String COLOR_PREMIUM = "§6";
 	public static String COLOR_STREAMER = "§3";
@@ -84,7 +85,7 @@ public class Game implements Listener {
 	public static String COLOR_SUPPORTER = "§9";
 	public static String COLOR_MODERATOR = "§c";
 	public static String COLOR_ADMIN = "§4";
-	
+
 	public static String getPrefix() {
 		String prefix = "§7[§l§6vulkan§4V2§r§7] ";
 		return prefix;
@@ -659,17 +660,19 @@ public class Game implements Listener {
 		 */
 		p.openInventory(shop);
 	}
-	
+
 	public static Inventory getWarpInv(Player p) {
 		String world = p.getWorld().getName();
-		
+
 		Inventory warp = Bukkit.createInventory(null, 9, "§l§6WARP");
 		warp.setItem(1, Game.createNamedItemStack(Material.DANDELION, 1, "§e1.16"));
 		warp.setItem(4, Game.createNamedItemStack(Material.ALLIUM, 1, "§aWarp"));
 		warp.setItem(7, Game.createNamedItemStack(Material.POPPY, 1, "§c1.17"));
-		
+
 		if (world.equalsIgnoreCase("world")) {
-			//wenn klick auf mittlere blume dann teleport zwischen spawn und lastlocation bzw. wenn man world ist dann loc als lastloc speichern und zu warp teleportieren
+			// wenn klick auf mittlere blume dann teleport zwischen spawn und lastlocation
+			// bzw. wenn man world ist dann loc als lastloc speichern und zu warp
+			// teleportieren
 		}
 		return warp;
 	}
@@ -877,24 +880,24 @@ public class Game implements Listener {
 			}
 		}
 	}
-	
+
 	public static Boolean containsNewerItems(Player p) {
 		// check if player has items in inventory which are 1.16.5 upwards
 		return false;
 	}
-	
+
 	public static String getUsername(Player p) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		return stats.getString("MCHype.Username");
 	}
-	
+
 	public static String getUsernameFormatted(Player p) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
-		return stats.getString("MCHype.Username") + " §7(§e" + p.getName() +"§7)§r";
+		return stats.getString("MCHype.Username") + " §7(§e" + p.getName() + "§7)§r";
 	}
-	
+
 	public static void setUsername(Player p, String username) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
@@ -905,7 +908,7 @@ public class Game implements Listener {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void removeItem(Player p, Material mat, int amount) {
 		for (int i = 0; i < p.getInventory().getSize(); i++) {
 			ItemStack itm = p.getInventory().getItem(i);
@@ -1104,5 +1107,90 @@ public class Game implements Listener {
 		Shop.price_snowball_sell = config.getDouble("Shop.Price.Sell.Snowball");
 		Shop.price_expbottle_sell = config.getDouble("Shop.Price.Sell.Expbottle");
 		Shop.price_firecharge_sell = config.getDouble("Shop.Price.Sell.Firecharge");
+	}
+
+	public static Boolean isTool(ItemStack i) {
+		if (i.getType() == Material.NETHERITE_PICKAXE) {
+			return true;
+		}
+		return false;
+	}
+
+	public static void destroyBlock(Location loc, String direction) {
+		//LOCATION Table
+		// First Layer
+		//	1 | 2 | 3
+		//	4 | 5 | 6
+		//	7 | 8 | 9
+		// Second Layer
+		//	10 | 11 | 12
+		//	13 | 14 | 15
+		// 	16 | 17 | 18
+		//	Third Layer
+		// 	19 | 20 | 21
+		// 	22 | 23 | 24
+		// 	25 | 26 | 27
+		
+		switch (direction) {
+		case "north":
+			// Location immer neu setzten statt 27 locations
+			Location loc1;
+			Location loc2;
+			Location loc3;
+			Location loc4;
+			Location loc5 = new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ());
+			Location loc6;
+			Location loc7;
+			Location loc8;
+			Location loc9;
+			Location loc10;
+			Location loc11;
+			Location loc12;
+			Location loc13;
+			Location loc14;
+			Location loc15;
+			Location loc16;
+			Location loc17;
+			Location loc18;
+			Location loc19;
+			Location loc20;
+			Location loc21;
+			Location loc22;
+			Location loc23;
+			Location loc24;
+			Location loc25;
+			Location loc26;
+			Location loc27;
+			break;
+		case "south":
+			
+			break;
+		case "east":
+			
+			break;
+		case "west":
+			
+			break;
+		case "up":
+			
+			break;
+		case "down":
+			
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	public static Inventory getBoostInv() {
+		Inventory inv = Bukkit.createInventory(null, 27, "§6Boost");
+		inv.setItem(2, Game.createNamedItemStack(Material.ANVIL, 1, "Tool verbessern"));
+		
+		//Effekte
+		inv.setItem(10, Game.createNamedItemStack(Material.RABBIT_FOOT, 1, "§aSprungkraft"));
+		inv.setItem(13, Game.createNamedItemStack(Material.FEATHER, 1, "§bSchnelligkeit"));
+		inv.setItem(16, Game.createNamedItemStack(Material.GOLDEN_APPLE, 1, "§cResistenz"));
+		return inv;
 	}
 }

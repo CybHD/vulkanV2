@@ -35,6 +35,55 @@ public class BlockBreak implements Listener {
 			int blocks = p.getMetadata("BlockBreak").get(0).asInt();
 			p.setMetadata("BlockBreak", new FixedMetadataValue(Main.getMain(), blocks + 1));
 		}
+		/*
+		if (p.getInventory().getItemInMainHand().getItemMeta() != null) {
+			if (p.getInventory().getItemInMainHand().getItemMeta().getLore() != null) {
+				if (p.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6§lEnhanced")) {
+					int x = p.getLocation().getBlockX();
+					int y = p.getLocation().getBlockY();
+					int z = p.getLocation().getBlockZ();
+					int targetX = e.getBlock().getLocation().getBlockX();
+					int targetY = e.getBlock().getLocation().getBlockY();
+					int targetZ = e.getBlock().getLocation().getBlockZ();
+					String direction = "";
+					if (x > targetX) {
+						direction = "west";
+						Game.destroyBlock(e.getBlock().getLocation(), direction);
+						return;
+					}
+					if (x < targetX) {
+						direction = "east";
+						Game.destroyBlock(e.getBlock().getLocation(), direction);
+						return;
+					}
+					if (z > targetZ) {
+						direction = "north";
+						Game.destroyBlock(e.getBlock().getLocation(), direction);
+						return;
+					}
+					if (z < targetZ) {
+						direction = "south";
+						Game.destroyBlock(e.getBlock().getLocation(), direction);
+						return;
+					}
+					if (y > targetY) {
+						direction = "down";
+						Game.destroyBlock(e.getBlock().getLocation(), direction);
+						return;
+					}
+					if (y < targetY) {
+						direction = "up";
+						Game.destroyBlock(e.getBlock().getLocation(), direction);
+						return;
+					}
+					// p.sendMessage(direction);
+					// get blocks to destroy
+					// if block is in claimed chunk check if owner or member
+
+				}
+			}
+		}
+		*/
 		if (e.getBlock().getType() == Material.TALL_GRASS) {
 			// TODO location check
 			// TODO createCustomItem
