@@ -30,7 +30,6 @@ import net.cybhd.vn.command.CraftExecutor;
 import net.cybhd.vn.command.EcoExecutor;
 import net.cybhd.vn.command.HomeExecutor;
 import net.cybhd.vn.command.HubExecutor;
-import net.cybhd.vn.command.JobExecutor;
 import net.cybhd.vn.command.ModeExecutor;
 import net.cybhd.vn.command.MsgExecutor;
 import net.cybhd.vn.command.PayExecutor;
@@ -42,6 +41,7 @@ import net.cybhd.vn.command.ReportExecutor;
 import net.cybhd.vn.command.ReportsExecutor;
 import net.cybhd.vn.command.SetHomeExecutor;
 import net.cybhd.vn.command.ShopExecutor;
+import net.cybhd.vn.command.SpawnExecutor;
 import net.cybhd.vn.command.StatsExecutor;
 import net.cybhd.vn.command.TargetExecutor;
 import net.cybhd.vn.command.TpAcceptExecutor;
@@ -50,12 +50,14 @@ import net.cybhd.vn.command.TpaExecutor;
 import net.cybhd.vn.command.UnClaimExecutor;
 import net.cybhd.vn.command.VulkanExecutor;
 import net.cybhd.vn.command.WarpExecutor;
+import net.cybhd.vn.job.Job;
 import net.cybhd.vn.listener.BlockBreak;
 import net.cybhd.vn.listener.BlockBuild;
 import net.cybhd.vn.listener.Chat;
 import net.cybhd.vn.listener.CraftItem;
 import net.cybhd.vn.listener.EntityChangeBlock;
 import net.cybhd.vn.listener.EntityDamage;
+import net.cybhd.vn.listener.EntityDeath;
 import net.cybhd.vn.listener.EntityExplode;
 import net.cybhd.vn.listener.EntityPortal;
 import net.cybhd.vn.listener.EntitySpawn;
@@ -65,11 +67,11 @@ import net.cybhd.vn.listener.PlayerDeath;
 import net.cybhd.vn.listener.PlayerInteract;
 import net.cybhd.vn.listener.PlayerInteractEntity;
 import net.cybhd.vn.listener.PlayerJoin;
-import net.cybhd.vn.listener.PlayerLogin;
+import net.cybhd.vn.listener.PlayerMove;
+import net.cybhd.vn.listener.PlayerPortal;
 import net.cybhd.vn.listener.PlayerPreLogin;
 import net.cybhd.vn.listener.PlayerQuit;
 import net.cybhd.vn.listener.PlayerRespawn;
-import net.cybhd.vn.listener.PlayerPortal;
 import net.cybhd.vn.listener.Shop;
 import net.cybhd.vn.listener.WeatherChange;
 
@@ -78,17 +80,15 @@ public class Main extends JavaPlugin {
 	public static Objective ob;
 	public static HashMap<UUID, Integer> bed = new HashMap<UUID, Integer>();
 	public static Main main;
-
 	public static HashMap<UUID, Float> hue;
 
 	@Override
 	public void onEnable() {
 
-		
 		Messenger messenger = Bukkit.getMessenger();
-		//messenger.registerIncomingPluginChannel(this, "minecraft:brand", new BrandPluginMessageListener());
+		// messenger.registerIncomingPluginChannel(this, "minecraft:brand", new
+		// BrandPluginMessageListener());
 		messenger.registerOutgoingPluginChannel(this, "BungeeCord");
-		
 
 		Game.Startup();
 
@@ -100,16 +100,16 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new BlockBreak(), this);
 		Bukkit.getPluginManager().registerEvents(new BlockBuild(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerPreLogin(), this);
-		Bukkit.getPluginManager().registerEvents(new PlayerLogin(), this);
+		//Bukkit.getPluginManager().registerEvents(new PlayerLogin(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerQuit(), this);
-		//Bukkit.getPluginManager().registerEvents(new PlayerMove(), this);
+		Bukkit.getPluginManager().registerEvents(new PlayerMove(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerChunkChange(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerPortal(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerRespawn(), this);
-		//Bukkit.getPluginManager().registerEvents(new PlayerBedEnter(), this);
-		//Bukkit.getPluginManager().registerEvents(new PlayerBedLeave(), this);
+		// Bukkit.getPluginManager().registerEvents(new PlayerBedEnter(), this);
+		// Bukkit.getPluginManager().registerEvents(new PlayerBedLeave(), this);
 		Bukkit.getPluginManager().registerEvents(new WeatherChange(), this);
 		Bukkit.getPluginManager().registerEvents(new Chat(), this);
 		Bukkit.getPluginManager().registerEvents(new Game(), this);
@@ -117,8 +117,9 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new Chunk(), this);
 		Bukkit.getPluginManager().registerEvents(new EntityExplode(), this);
 		Bukkit.getPluginManager().registerEvents(new EntityPortal(), this);
-		//Bukkit.getPluginManager().registerEvents(new EntityDeath(), this);
+		Bukkit.getPluginManager().registerEvents(new EntityDeath(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryClick(), this);
+		Bukkit.getPluginManager().registerEvents(new net.cybhd.vn.job.InventoryClick(), this);
 		Bukkit.getPluginManager().registerEvents(new ReportsExecutor(), this);
 		Bukkit.getPluginManager().registerEvents(new EntityChangeBlock(), this);
 		// Bukkit.getPluginManager().registerEvents(new ProjectileHit(), this);
@@ -130,7 +131,7 @@ public class Main extends JavaPlugin {
 		this.getCommand("eco").setExecutor(new EcoExecutor());
 		this.getCommand("tpa").setExecutor(new TpaExecutor());
 		this.getCommand("msg").setExecutor(new MsgExecutor());
-		this.getCommand("job").setExecutor(new JobExecutor());
+		this.getCommand("job").setExecutor(new Job());
 		this.getCommand("warp").setExecutor(new WarpExecutor());
 		this.getCommand("mode").setExecutor(new ModeExecutor());
 		this.getCommand("ping").setExecutor(new PingExecutor());
@@ -141,6 +142,7 @@ public class Main extends JavaPlugin {
 		this.getCommand("home").setExecutor(new HomeExecutor());
 		this.getCommand("lobby").setExecutor(new HubExecutor());
 		this.getCommand("boost").setExecutor(new BoostExecutor());
+		this.getCommand("spawn").setExecutor(new SpawnExecutor());
 		this.getCommand("sethome").setExecutor(new SetHomeExecutor());
 		this.getCommand("auction").setExecutor(new AuctionExecutor());
 		this.getCommand("auktion").setExecutor(new AuctionExecutor());
@@ -159,7 +161,7 @@ public class Main extends JavaPlugin {
 		this.getCommand("abilitys").setExecutor(new AbilitiesExecutor());
 		this.getCommand("abilities").setExecutor(new AbilitiesExecutor());
 		this.getCommand("clan").setExecutor(new ClanExecutor());
-		
+
 		if (!this.getDataFolder().exists()) {
 			this.getDataFolder().mkdir();
 		}
@@ -271,34 +273,33 @@ public class Main extends JavaPlugin {
 		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), -2.5, 112, 0.5, -90, 0);
 		return spawnLOC;
 	}
-	
+
+	public static Location getWorldLoc() {
+		Location worldLOC = new Location(Bukkit.getWorld("world"), 104.5, 66, -6.5, 180, 0);
+		return worldLOC;
+	}
+
 //	OLD Spawn Loc
 //	public static Location getSpawnLoc() {
 //		Location spawnLOC = new Location(Bukkit.getWorld("spawn"), 607.5, 24, 116.5, -90, 0);
 //		return spawnLOC;
 //	}
 
-	public static Location getSpawnLocByConfig() {
-		YamlConfiguration config = YamlConfiguration.loadConfiguration(Game.getConfigFile());
-		String name = config.getString("Hub.World");
-		Double x = config.getDouble("Hub.X");
-		Double y = config.getDouble("Hub.Y");
-		Double z = config.getDouble("Hub.Z");
-		float yaw = (float) config.getDouble("Hub.Yaw");
-		float pitch = (float) config.getDouble("Hub.Pitch");
-
-		Location loc = new Location(Bukkit.getWorld(name), x, y, z, yaw, pitch);
-		return loc;
-	}
-
-	public static Location getWorldLoc() {
-		Location worldLOC = new Location(Bukkit.getWorld("world"), 104.5, 66, -6.5, 180, 0);
-		return worldLOC;
-	}
-	
-	//TODO fill correct location
-	public static Location get117Loc() {
-		Location worldLOC = new Location(Bukkit.getWorld("117"), 0, 80, 0, 0, 0);
-		return worldLOC;
-	}
+	/*
+	 * public static Location getSpawnLocByConfig() { YamlConfiguration config =
+	 * YamlConfiguration.loadConfiguration(Game.getConfigFile()); String name =
+	 * config.getString("Hub.World"); Double x = config.getDouble("Hub.X"); Double y
+	 * = config.getDouble("Hub.Y"); Double z = config.getDouble("Hub.Z"); float yaw
+	 * = (float) config.getDouble("Hub.Yaw"); float pitch = (float)
+	 * config.getDouble("Hub.Pitch");
+	 * 
+	 * Location loc = new Location(Bukkit.getWorld(name), x, y, z, yaw, pitch);
+	 * return loc; }
+	 * 
+	 */
+	/*
+	 * //TODO fill correct location public static Location get117Loc() { Location
+	 * worldLOC = new Location(Bukkit.getWorld("117"), 0, 80, 0, 0, 0); return
+	 * worldLOC; }
+	 */
 }

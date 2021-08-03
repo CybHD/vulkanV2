@@ -53,6 +53,7 @@ public class ClanExecutor implements CommandExecutor {
 							if (p.hasMetadata("ClanInvite")) {
 								String ClanName = p.getMetadata("ClanInvite").get(0).asString();
 								Clan.addMember(p, ClanName);
+								p.removeMetadata("ClanInvite", Main.getMain());
 								p.sendMessage(
 										"§6Du bist erfolgreich dem Clan §c" + Clan.getClanName(p) + " §6beigetreten");
 							} else {
@@ -103,15 +104,22 @@ public class ClanExecutor implements CommandExecutor {
 				if (Clan.isOwner(p, Clan.getClanName(p))) {
 					p.sendMessage("§6Dein Clan: §c" + Clan.getClanName(p));
 					p.sendMessage("§6Rang: §cOwner");
-					p.sendMessage("§6Member: §c" + Clan.getMemberList(Clan.getClanName(p)));
+					StringBuilder sb = new StringBuilder();
+					for (int i = 0; i < Clan.getMemberList(Clan.getClanName(p)).size(); i++) {
+						sb.append(Clan.getMemberList(Clan.getClanName(p)).get(i) + ", ");
+					}
+					p.sendMessage("§6Member: §c" + sb.toString());
 				} else if (Clan.isMember(p)) {
 					p.sendMessage("§6Dein Clan: §c" + Clan.getClanName(p));
 					p.sendMessage("§6Rang: §cMember");
-					p.sendMessage("§6Member: §c" + Clan.getMemberList(Clan.getClanName(p)));
+					StringBuilder sb = new StringBuilder();
+					for (int i = 0; i < Clan.getMemberList(Clan.getClanName(p)).size(); i++) {
+						sb.append(Clan.getMemberList(Clan.getClanName(p)).get(i) + ", ");
+					}
+					p.sendMessage("§6Member: §c" + sb.toString());
 				} else {
-					p.sendMessage("§6Dein Clan: §cN/A");
-					p.sendMessage("§6Rang: §cN/A");
-					p.sendMessage("§6Member: §cN/A");
+					p.sendMessage("§6Du bist derzeit in §ckeinem §6Clan");
+					p.sendMessage("§c/clan create *NAME* §6 um einen Clan für §c2500 §6$ zu erstellen");
 				}
 			}
 		}

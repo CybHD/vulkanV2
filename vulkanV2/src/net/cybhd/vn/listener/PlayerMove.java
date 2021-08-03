@@ -16,7 +16,7 @@ public class PlayerMove implements Listener {
 		if (p.getLocation().getWorld().getName().equals("spawn")) {
 			Location loc = p.getLocation();
 			if (loc.getY() <= 40) {
-				p.teleport(Main.getWorldLoc());
+				p.teleport(Main.getSpawnLoc());
 			}
 		}
 	}

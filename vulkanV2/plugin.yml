@@ -18,6 +18,7 @@ commands:
      plot:
      home:
      clan:
+     spawn:
      craft:
      stats:
      claim:

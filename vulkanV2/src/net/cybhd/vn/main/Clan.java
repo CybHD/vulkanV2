@@ -10,9 +10,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 public class Clan {
 
-	@Deprecated
 	public static File fclans = new File("plugins/vulkan/CLANS/CLANS.yml");
-	@Deprecated
 	public static YamlConfiguration clans = YamlConfiguration.loadConfiguration(fclans);
 
 	public static boolean isMember(Player p) { // is player a clan member
@@ -38,23 +36,13 @@ public class Clan {
 	}
 
 	/*
-	public static boolean isClanMember(Player p, String name) { // is player member/owner of specific clan
-		Boolean b = false;
-		if (doesExist(name)) {
-			ArrayList<String> member = (ArrayList<String>) clans.getStringList("Clans." + name + ".Member");
-			if (member.contains(p.getName())) {
-				b = true;
-			} else if (isOwner(p, name)) {
-				b = true;
-			} else {
-				b = false;
-			}
-		} else {
-			return b;
-		}
-		return b;
-	}
-	*/
+	 * public static boolean isClanMember(Player p, String name) { // is player
+	 * member/owner of specific clan Boolean b = false; if (doesExist(name)) {
+	 * ArrayList<String> member = (ArrayList<String>) clans.getStringList("Clans." +
+	 * name + ".Member"); if (member.contains(p.getName())) { b = true; } else if
+	 * (isOwner(p, name)) { b = true; } else { b = false; } } else { return b; }
+	 * return b; }
+	 */
 
 	public static boolean isOwner(Player p, String name) {
 		Boolean b = false;
@@ -141,6 +129,12 @@ public class Clan {
 				stats.set("Clan.Name", name);
 				stats.set("Clan.isOwner", true);
 				stats.set("Clan.timeJoined", timeCreated);
+				clans.set("Clans." + name + ".Member", new ArrayList<String>());
+				try {
+					clans.save(fclans);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				try {
 					config.save(Game.getConfigFile());
 				} catch (IOException e) {
@@ -152,6 +146,17 @@ public class Clan {
 					e.printStackTrace();
 				}
 				p.sendMessage("§6Clan erfolgreich erstellt");
+				if (p.hasPermission(Game.getAdminPermission())) {
+					p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§4" + Game.getUsernameFormatted(p));
+				} else if (p.hasPermission(Game.getModPermission())) {
+					p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§c" + Game.getUsernameFormatted(p));
+				} else if (p.hasPermission(Game.getSupPermission())) {
+					p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§9" + Game.getUsernameFormatted(p));
+				} else if (p.hasPermission(Game.getPremPermission())) {
+					p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§6" + Game.getUsernameFormatted(p));
+				} else {
+					p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§2" + Game.getUsernameFormatted(p));
+				}
 			} else {
 				p.sendMessage("Der Clan existiert bereits");
 			}
@@ -186,13 +191,33 @@ public class Clan {
 			} else {
 				File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 				YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
+				@SuppressWarnings("unchecked")
+				ArrayList<String> member = (ArrayList<String>) clans.getList("Clans." + getClanName(p) + ".Member");
 				stats.set("Clan.Name", "NA");
+				member.remove(p.getName());
+				try {
+					clans.save(fclans);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				try {
 					stats.save(fstats);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				p.sendMessage("§6Du hast den Clan verlassen");
+			}
+			// Update Tablist Name
+			if (p.hasPermission(Game.getAdminPermission())) {
+				p.setPlayerListName("§4" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getModPermission())) {
+				p.setPlayerListName("§c" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getSupPermission())) {
+				p.setPlayerListName("§9" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getPremPermission())) {
+				p.setPlayerListName("§6" + Game.getUsernameFormatted(p));
+			} else {
+				p.setPlayerListName("§2" + Game.getUsernameFormatted(p));
 			}
 		} else {
 			p.sendMessage("§cDu bist in keinem Clan");
@@ -218,12 +243,33 @@ public class Clan {
 				stats.save(fstats);
 			} catch (IOException e) {
 				e.printStackTrace();
+				return;
+			}
+			@SuppressWarnings("unchecked")
+			ArrayList<String> member = (ArrayList<String>) clans.getList("Clans." + name + ".Member");
+			member.add(p.getName());
+			clans.set("Clans." + name + ".Member", member);
+			try {
+				clans.save(fclans);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (p.hasPermission(Game.getAdminPermission())) {
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§4" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getModPermission())) {
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§c" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getSupPermission())) {
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§9" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getPremPermission())) {
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§6" + Game.getUsernameFormatted(p));
+			} else {
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§2" + Game.getUsernameFormatted(p));
 			}
 		} else {
 			p.sendMessage("§4ERROR Clan does not exist");
 		}
 	}
-
+	
 	public static void removeMember(Player p, String name) {
 		if (doesExist(name)) {
 			ArrayList<String> member = (ArrayList<String>) clans.getStringList("Clans." + name + ".Member");

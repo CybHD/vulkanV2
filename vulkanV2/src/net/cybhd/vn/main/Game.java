@@ -665,9 +665,9 @@ public class Game implements Listener {
 		String world = p.getWorld().getName();
 
 		Inventory warp = Bukkit.createInventory(null, 9, "§l§6WARP");
-		warp.setItem(1, Game.createNamedItemStack(Material.DANDELION, 1, "§e1.16"));
+		//warp.setItem(1, Game.createNamedItemStack(Material.DANDELION, 1, "§e1.16"));
 		warp.setItem(4, Game.createNamedItemStack(Material.ALLIUM, 1, "§aWarp"));
-		warp.setItem(7, Game.createNamedItemStack(Material.POPPY, 1, "§c1.17"));
+		//warp.setItem(7, Game.createNamedItemStack(Material.POPPY, 1, "§c1.17"));
 
 		if (world.equalsIgnoreCase("world")) {
 			// wenn klick auf mittlere blume dann teleport zwischen spawn und lastlocation
@@ -892,10 +892,16 @@ public class Game implements Listener {
 		return stats.getString("MCHype.Username");
 	}
 
+	/*
 	public static String getUsernameFormatted(Player p) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		return stats.getString("MCHype.Username") + " §7(§e" + p.getName() + "§7)§r";
+	}
+	*/
+	
+	public static String getUsernameFormatted(Player p) {
+		return p.getName();
 	}
 
 	public static void setUsername(Player p, String username) {
@@ -1185,7 +1191,7 @@ public class Game implements Listener {
 
 	public static Inventory getBoostInv() {
 		Inventory inv = Bukkit.createInventory(null, 27, "§6Boost");
-		inv.setItem(2, Game.createNamedItemStack(Material.ANVIL, 1, "Tool verbessern"));
+		//inv.setItem(2, Game.createNamedItemStack(Material.ANVIL, 1, "Tool verbessern"));
 		
 		//Effekte
 		inv.setItem(10, Game.createNamedItemStack(Material.RABBIT_FOOT, 1, "§aSprungkraft"));

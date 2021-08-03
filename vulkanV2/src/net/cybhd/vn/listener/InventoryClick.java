@@ -1,6 +1,7 @@
 package net.cybhd.vn.listener;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
@@ -136,29 +137,13 @@ public class InventoryClick implements Listener {
 				break;
 			}
 		}
-		if (e.getView().getTitle().equals("§6Arbeitsamt")) {
-			e.setCancelled(true);
-		}
 		if (e.getView().getTitle().equals("§l§6WARP")) {
 			e.setCancelled(true);
 			if (!(p.getHealth() >= 14)) {
-				p.sendMessage("§cDu hast nicht genug Leben");
+				p.sendMessage("§cDu brauchst mindestens 7 Herzen für diesen Befehl");
 				return;
 			}
-			if (e.getRawSlot() == 1) {
-				if (p.getWorld().getName().equals("world")) {
-					p.sendMessage("§cDu bist bereits in dieser Welt");
-					return;
-				}
 
-				if (Game.containsNewerItems(p)) {
-					p.sendMessage("§cDu hast Items die zu neu für die Version sind");
-					return;
-				}
-
-				p.teleport(Main.getWorldLoc());
-				return;
-			}
 			if (e.getRawSlot() == 4) {
 				File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 				YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
@@ -189,18 +174,8 @@ public class InventoryClick implements Listener {
 				}
 				return;
 			}
-			if (e.getRawSlot() == 7) {
-				//TODO
-				/*
-				if (p.getWorld().getName().equals("117")) {
-					p.sendMessage("§cDu bist bereits in dieser Welt");
-					return;
-				}
-				p.teleport(Main.get117Loc());
-				return;
-				*/
-			}
 		}
+		
 		if (e.getView().getTitle().equals("§6Auktionshaus")) {
 			File fauction = new File("plugins/vulkan/auction.yml");
 			YamlConfiguration auction = YamlConfiguration.loadConfiguration(fauction);
@@ -231,6 +206,16 @@ public class InventoryClick implements Listener {
 															+ price + " §6$ im Auktionshaus gekauft");
 													p.getInventory().addItem(item);
 													Eco.addOfflinePlayer(seller, price);
+													//decrease sellers Auction.Items by 1
+													File fstats = new File("plugins/vulkan/PLAYERS/" + seller + ".yml");
+													YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
+													int itemsInAuction = stats.getInt("Auction.Items");
+													stats.set("Auction.Items", itemsInAuction - 1);
+													try {
+														stats.save(fstats);
+													} catch (IOException e1) {
+														e1.printStackTrace();
+													}
 													Auction.updateInventory();
 													if (Game.isValidPlayerName(seller)) {
 														Player t = Bukkit.getPlayer(seller);

@@ -31,8 +31,11 @@ public class Auction {
 		int i = 0;
 		File fauction = new File("plugins/vulkan/auction.yml");
 		YamlConfiguration auction = YamlConfiguration.loadConfiguration(fauction);
-		for (String key : auction.getConfigurationSection("Items").getKeys(false)) { // returns auction number
-			i = Game.convertToInt(key) + 1;
+		try {
+			for (String key : auction.getConfigurationSection("Items").getKeys(false)) { // returns auction number
+				i = Game.convertToInt(key) + 1;
+			}
+		} catch (Exception e) {
 		}
 		return i;
 	}

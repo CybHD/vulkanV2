@@ -16,7 +16,6 @@ public class EntityDeath implements Listener {
 		if (!(e.getEntity() instanceof Player)) {
 			if (e.getEntity().getKiller() instanceof Player) {
 				Player p = e.getEntity().getKiller();
-				// add Entity Kill to stats
 				File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 				YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 				stats.set("Entity.Kills", stats.getInt("Entity.Kills") + 1);
