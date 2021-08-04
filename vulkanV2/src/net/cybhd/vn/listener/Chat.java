@@ -35,6 +35,10 @@ public class Chat implements Listener {
 				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§c" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getSupPermission())) {
 				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§9" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
+			} else if (p.hasPermission(Game.getContentPermission())) {
+				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§3" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
+			} else if (p.hasPermission(Game.getSuPremPermission())) {
+				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§b" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getPremPermission())) {
 				e.setFormat("§7[§e" + Clan.getClanName(p) + "§7] " + "§6" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
 			} else {
@@ -47,6 +51,10 @@ public class Chat implements Listener {
 				e.setFormat("§c" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getSupPermission())) {
 				e.setFormat("§9" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
+			} else if (p.hasPermission(Game.getContentPermission())) {
+				e.setFormat("§3" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
+			} else if (p.hasPermission(Game.getSuPremPermission())) {
+				e.setFormat("§b" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
 			} else if (p.hasPermission(Game.getPremPermission())) {
 				e.setFormat("§6" + Game.getUsernameFormatted(p) + " §e> §7" + msg);
 			} else {

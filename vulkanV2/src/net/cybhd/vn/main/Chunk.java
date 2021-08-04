@@ -73,24 +73,11 @@ public class Chunk implements Listener {
 			File fchunks = new File("plugins/vulkan/CHUNKS.yml");
 			YamlConfiguration chunks = YamlConfiguration.loadConfiguration(fchunks);
 			if (chunks.isSet(loc.getChunk().toString())) {
-				if (!p.hasPermission(Game.getAdminPermission())) {
-					if (chunks.getString(loc.getChunk() + ".owner").equals(p.getName())) {
-						b = true;
-					}
-					if (chunks.getStringList(loc.getChunk() + ".member").contains(p.getName())) {
-						b = true;
-					}
-					/*
-					if (chunks.getString(loc.getChunk() + ".owner").equals(Clan.getOwner(Clan.getClanName(p)))) {
-						b = true;
-					}
-					*/
-				} else {
-					if (p.hasMetadata("vulkan.vanish")) {
-						b = true;
-					} else {
-						p.sendMessage("§cDu kannst nur im Vanish gekaufte Grundstücke bearbeiten");
-					}
+				if (chunks.getString(loc.getChunk() + ".owner").equals(p.getName())) {
+					b = true;
+				}
+				if (chunks.getStringList(loc.getChunk() + ".member").contains(p.getName())) {
+					b = true;
 				}
 			} else { // Triggert wenn Plot unclaimed
 				b = true;

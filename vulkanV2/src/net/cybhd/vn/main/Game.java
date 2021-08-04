@@ -80,8 +80,8 @@ public class Game implements Listener {
 
 	public static String COLOR_PLAYER = "§2";
 	public static String COLOR_PREMIUM = "§6";
-	public static String COLOR_STREAMER = "§3";
-	public static String COLOR_YOUTBER = "§5";
+	public static String COLOR_SUPREMIUM = "§b";
+	public static String COLOR_CONTENT = "§3";
 	public static String COLOR_SUPPORTER = "§9";
 	public static String COLOR_MODERATOR = "§c";
 	public static String COLOR_ADMIN = "§4";
@@ -93,6 +93,16 @@ public class Game implements Listener {
 
 	public static String getPremPermission() {
 		String perm = "vn.premium";
+		return perm;
+	}
+
+	public static String getSuPremPermission() {
+		String perm = "vn.supremium";
+		return perm;
+	}
+
+	public static String getContentPermission() {
+		String perm = "vn.content";
 		return perm;
 	}
 
@@ -665,9 +675,9 @@ public class Game implements Listener {
 		String world = p.getWorld().getName();
 
 		Inventory warp = Bukkit.createInventory(null, 9, "§l§6WARP");
-		//warp.setItem(1, Game.createNamedItemStack(Material.DANDELION, 1, "§e1.16"));
+		// warp.setItem(1, Game.createNamedItemStack(Material.DANDELION, 1, "§e1.16"));
 		warp.setItem(4, Game.createNamedItemStack(Material.ALLIUM, 1, "§aWarp"));
-		//warp.setItem(7, Game.createNamedItemStack(Material.POPPY, 1, "§c1.17"));
+		// warp.setItem(7, Game.createNamedItemStack(Material.POPPY, 1, "§c1.17"));
 
 		if (world.equalsIgnoreCase("world")) {
 			// wenn klick auf mittlere blume dann teleport zwischen spawn und lastlocation
@@ -675,6 +685,24 @@ public class Game implements Listener {
 			// teleportieren
 		}
 		return warp;
+	}
+
+	public static Inventory getBackPackInv(Player p) {
+		Inventory inv = null;
+		File fbackpack = new File("plugins/vulkan/BACKPACKS/" + p.getName() + ".yml");
+		YamlConfiguration backpack = YamlConfiguration.loadConfiguration(fbackpack);
+		if (p.hasPermission(Game.getSuPremPermission())) {
+			inv = Bukkit.createInventory(null, 54, "§6Rucksack");
+			for (int i = 0; i < 54; i++) {
+				inv.setItem(i, backpack.getItemStack(String.valueOf(i)));
+			}
+		} else if (p.hasPermission(Game.getPremPermission())) {
+			inv = Bukkit.createInventory(null, 27, "§6Rucksack");
+			for (int i = 0; i < 27; i++) {
+				inv.setItem(i, backpack.getItemStack(String.valueOf(i)));
+			}
+		}
+		return inv;
 	}
 
 	public static void openShopInv(Player p, int j) {
@@ -893,13 +921,12 @@ public class Game implements Listener {
 	}
 
 	/*
-	public static String getUsernameFormatted(Player p) {
-		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
-		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
-		return stats.getString("MCHype.Username") + " §7(§e" + p.getName() + "§7)§r";
-	}
-	*/
-	
+	 * public static String getUsernameFormatted(Player p) { File fstats = new
+	 * File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml"); YamlConfiguration
+	 * stats = YamlConfiguration.loadConfiguration(fstats); return
+	 * stats.getString("MCHype.Username") + " §7(§e" + p.getName() + "§7)§r"; }
+	 */
+
 	public static String getUsernameFormatted(Player p) {
 		return p.getName();
 	}
@@ -1123,20 +1150,20 @@ public class Game implements Listener {
 	}
 
 	public static void destroyBlock(Location loc, String direction) {
-		//LOCATION Table
+		// LOCATION Table
 		// First Layer
-		//	1 | 2 | 3
-		//	4 | 5 | 6
-		//	7 | 8 | 9
+		// 1 | 2 | 3
+		// 4 | 5 | 6
+		// 7 | 8 | 9
 		// Second Layer
-		//	10 | 11 | 12
-		//	13 | 14 | 15
-		// 	16 | 17 | 18
-		//	Third Layer
-		// 	19 | 20 | 21
-		// 	22 | 23 | 24
-		// 	25 | 26 | 27
-		
+		// 10 | 11 | 12
+		// 13 | 14 | 15
+		// 16 | 17 | 18
+		// Third Layer
+		// 19 | 20 | 21
+		// 22 | 23 | 24
+		// 25 | 26 | 27
+
 		switch (direction) {
 		case "north":
 			// Location immer neu setzten statt 27 locations
@@ -1169,19 +1196,19 @@ public class Game implements Listener {
 			Location loc27;
 			break;
 		case "south":
-			
+
 			break;
 		case "east":
-			
+
 			break;
 		case "west":
-			
+
 			break;
 		case "up":
-			
+
 			break;
 		case "down":
-			
+
 			break;
 
 		default:
@@ -1191,9 +1218,10 @@ public class Game implements Listener {
 
 	public static Inventory getBoostInv() {
 		Inventory inv = Bukkit.createInventory(null, 27, "§6Boost");
-		//inv.setItem(2, Game.createNamedItemStack(Material.ANVIL, 1, "Tool verbessern"));
-		
-		//Effekte
+		// inv.setItem(2, Game.createNamedItemStack(Material.ANVIL, 1, "Tool
+		// verbessern"));
+
+		// Effekte
 		inv.setItem(10, Game.createNamedItemStack(Material.RABBIT_FOOT, 1, "§aSprungkraft"));
 		inv.setItem(13, Game.createNamedItemStack(Material.FEATHER, 1, "§bSchnelligkeit"));
 		inv.setItem(16, Game.createNamedItemStack(Material.GOLDEN_APPLE, 1, "§cResistenz"));

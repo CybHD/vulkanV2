@@ -2,9 +2,9 @@ package net.cybhd.vn.listener;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import net.cybhd.vn.ability.Ability;
@@ -36,7 +37,7 @@ public class PlayerJoin implements Listener {
 		AttributeInstance instance = p.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
 		instance.setBaseValue(16);
 
-		p.setBedSpawnLocation(Main.getSpawnLoc(), true);
+		p.setBedSpawnLocation(Main.getSpawnLoc(), false);
 		p.setMetadata("BlockBreak", new FixedMetadataValue(Main.getMain(), 0));
 		p.setMetadata("BlockPlace", new FixedMetadataValue(Main.getMain(), 0));
 
@@ -83,6 +84,23 @@ public class PlayerJoin implements Listener {
 				e1.printStackTrace();
 			}
 		}
+		
+		File fbackpack = new File("plugins/vulkan/BACKPACKS/" + p.getName() + ".yml");
+		YamlConfiguration backpack = YamlConfiguration.loadConfiguration(fbackpack);
+		
+		//create backpack file
+		if (!fbackpack.exists()) {
+			try {
+				fbackpack.createNewFile();
+				for (int i = 0; i < 54; i++) {
+					ItemStack is = new ItemStack(Material.AIR);
+					backpack.set(String.valueOf(i), is);
+				}
+				backpack.save(fbackpack);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 
 		// Player List Name
 		if (Clan.isMember(p)) {
@@ -92,6 +110,10 @@ public class PlayerJoin implements Listener {
 				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§c" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getSupPermission())) {
 				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§9" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getContentPermission())) {
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§3" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getSuPremPermission())) {
+				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§b" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getPremPermission())) {
 				p.setPlayerListName("§7[§e" + Clan.getClanName(p) + "§7] " + "§6" + Game.getUsernameFormatted(p));
 			} else {
@@ -104,6 +126,10 @@ public class PlayerJoin implements Listener {
 				p.setPlayerListName("§c" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getSupPermission())) {
 				p.setPlayerListName("§9" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getContentPermission())) {
+				p.setPlayerListName("§3" + Game.getUsernameFormatted(p));
+			} else if (p.hasPermission(Game.getSuPremPermission())) {
+				p.setPlayerListName("§b" + Game.getUsernameFormatted(p));
 			} else if (p.hasPermission(Game.getPremPermission())) {
 				p.setPlayerListName("§6" + Game.getUsernameFormatted(p));
 			} else {

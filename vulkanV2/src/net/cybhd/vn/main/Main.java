@@ -23,6 +23,7 @@ import org.bukkit.scoreboard.Objective;
 import net.cybhd.vn.ability.Ability;
 import net.cybhd.vn.command.AbilitiesExecutor;
 import net.cybhd.vn.command.AuctionExecutor;
+import net.cybhd.vn.command.BackpackExecutor;
 import net.cybhd.vn.command.BoostExecutor;
 import net.cybhd.vn.command.ClaimExecutor;
 import net.cybhd.vn.command.ClanExecutor;
@@ -51,6 +52,7 @@ import net.cybhd.vn.command.UnClaimExecutor;
 import net.cybhd.vn.command.VulkanExecutor;
 import net.cybhd.vn.command.WarpExecutor;
 import net.cybhd.vn.job.Job;
+import net.cybhd.vn.listener.BackpackListener;
 import net.cybhd.vn.listener.BlockBreak;
 import net.cybhd.vn.listener.BlockBuild;
 import net.cybhd.vn.listener.Chat;
@@ -110,6 +112,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new PlayerRespawn(), this);
 		// Bukkit.getPluginManager().registerEvents(new PlayerBedEnter(), this);
 		// Bukkit.getPluginManager().registerEvents(new PlayerBedLeave(), this);
+		Bukkit.getPluginManager().registerEvents(new BackpackListener(), this);
 		Bukkit.getPluginManager().registerEvents(new WeatherChange(), this);
 		Bukkit.getPluginManager().registerEvents(new Chat(), this);
 		Bukkit.getPluginManager().registerEvents(new Game(), this);
@@ -159,6 +162,7 @@ public class Main extends JavaPlugin {
 		// this.getCommand("login").setExecutor(new LoginExecutor());
 		this.getCommand("reports").setExecutor(new ReportsExecutor());
 		this.getCommand("abilitys").setExecutor(new AbilitiesExecutor());
+		this.getCommand("backpack").setExecutor(new BackpackExecutor());
 		this.getCommand("abilities").setExecutor(new AbilitiesExecutor());
 		this.getCommand("clan").setExecutor(new ClanExecutor());
 
@@ -275,7 +279,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public static Location getWorldLoc() {
-		Location worldLOC = new Location(Bukkit.getWorld("world"), 104.5, 66, -6.5, 180, 0);
+		Location worldLOC = new Location(Bukkit.getWorld("world"), 71.5, 69, -121.5, 0, 0);
 		return worldLOC;
 	}
 

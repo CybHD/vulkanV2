@@ -73,7 +73,7 @@ public class Job implements CommandExecutor {
 	}
 	
 	public static Inventory getJobInv(Player p) {
-		Inventory inv = Bukkit.createInventory(null, 54, "§6§lJob");
+		Inventory inv = Bukkit.createInventory(null, 27, "§6§lJob");
 		if (getJob(p).equals("miner")) {
 			//TODO add lore with price and xp amount to items
 			inv.setItem(0, Game.createNamedItemStack(Material.COBBLESTONE, 1, "§7Bruchstein"));

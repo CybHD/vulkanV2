@@ -38,6 +38,10 @@ public class Util {
 			obj.getScore("§c§oModerator").setScore(9);
 		} else if (p.hasPermission(Game.getSupPermission())) {
 			obj.getScore("§9§oSupporter").setScore(9);
+		} else if (p.hasPermission(Game.getContentPermission())) {
+			obj.getScore("§3§oContent").setScore(9);
+		} else if (p.hasPermission(Game.getSuPremPermission())) {
+			obj.getScore("§b§oSupremium").setScore(9);
 		} else if (p.hasPermission(Game.getPremPermission())) {
 			obj.getScore("§6§oPremium").setScore(9);
 		} else {
@@ -84,8 +88,10 @@ public class Util {
 		Team admin = s.registerNewTeam("0000Admin");
 		Team mod = s.registerNewTeam("0001Mod");
 		Team sup = s.registerNewTeam("0002Sup");
-		Team prem = s.registerNewTeam("0003Prem");
-		Team spieler = s.registerNewTeam("0004Spieler");
+		Team content = s.registerNewTeam("0003Content");
+		Team suprem = s.registerNewTeam("0004Suprem");
+		Team prem = s.registerNewTeam("0005Prem");
+		Team spieler = s.registerNewTeam("0006Spieler");
 
 		admin.setPrefix("§4");
 		admin.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
@@ -93,9 +99,13 @@ public class Util {
 		mod.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
 		sup.setPrefix("§9");
 		sup.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		content.setPrefix("§3");
+		content.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		suprem.setPrefix("§b");
+		suprem.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
 		prem.setPrefix("§6");
 		prem.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-		spieler.setPrefix("§a");
+		spieler.setPrefix("§2");
 		spieler.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
 
 		for (Player ps : Bukkit.getOnlinePlayers()) {
@@ -105,6 +115,10 @@ public class Util {
 				mod.addEntry(ps.getName());
 			} else if (ps.hasPermission(Game.getSupPermission())) {
 				sup.addEntry(ps.getName());
+			} else if (ps.hasPermission(Game.getContentPermission())) {
+				content.addEntry(ps.getName());
+			} else if (ps.hasPermission(Game.getSuPremPermission())) {
+				suprem.addEntry(ps.getName());
 			} else if (ps.hasPermission(Game.getPremPermission())) {
 				prem.addEntry(ps.getName());
 			} else {
@@ -119,10 +133,13 @@ public class Util {
 		Team admin = s.getTeam("0000Admin");
 		Team mod = s.getTeam("0001Mod");
 		Team sup = s.getTeam("0002Sup");
-		Team prem = s.getTeam("0003Prem");
-		Team spieler = s.getTeam("0004Spieler");
+		Team content = s.getTeam("0003Content");
+		Team suprem = s.getTeam("0004Suprem");
+		Team prem = s.getTeam("0005Prem");
+		Team spieler = s.getTeam("0006Spieler");
 
-		if (admin == null || mod == null || sup == null || prem == null || spieler == null) {
+		if (admin == null || mod == null || sup == null || content == null || suprem == null || prem == null
+				|| spieler == null) {
 			setTab(p);
 			return;
 		}
