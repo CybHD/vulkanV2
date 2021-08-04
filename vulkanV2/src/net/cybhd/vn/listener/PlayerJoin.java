@@ -63,6 +63,8 @@ public class PlayerJoin implements Listener {
 				stats.set("Job.Fisher.XP", 0);
 				stats.set("Job.Farmer.Level", 0);
 				stats.set("Job.Farmer.XP", 0);
+				stats.set("Reward.Collected", false);
+				stats.set("Reward.Time", 0);
 				stats.set("Kills", 0);
 				stats.set("Deaths", 0);
 				stats.set("Entity.Kills", 0);

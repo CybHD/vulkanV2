@@ -3,6 +3,7 @@ package net.cybhd.vn.listener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -21,6 +22,10 @@ public class EntityDamage implements Listener {
 				Game.sendConsoleMSG(p.getPlayerListName() + " §6took §c" + e.getDamage() + " §7(§c" + e.getDamage() / 2 + "§7)", ChatColor.RED);
 			}
 		}
-		
+		if (e.getEntity() instanceof Villager) {
+			if (e.getEntity().getWorld().getName().equals("spawn")) {
+				e.setCancelled(true);
+			}
+		}
 	}
 }

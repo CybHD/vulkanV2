@@ -20,38 +20,30 @@ public class Job implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
 		if (args.length == 0) {
-			//open job inventory where player can cut items in and recieve xp amount for items
+			// open job inventory where player can cut items in and recieve xp amount for
+			// items
 			if (!getJob(p).equals("none")) {
-				p.openInventory(getJobInv(p));
+				if (p.hasPermission(Game.getAdminPermission())) {
+					p.openInventory(getJobInv(p));
+				} else {
+					p.sendMessage("§4An diesem Befehl wird derzeit noch gearbeitet");
+				}
 			} else {
 				p.sendMessage("§cDu brauchst einen Job um diesen Befehl nutzen zu können");
 			}
-		} else if (args.length == 1) {
-			if (!p.hasPermission(Game.getAdminPermission())) {
-				p.sendMessage("§cDu hast keine REchte für diesen Befehl");
-				return false;
-			}
-			if (args[0].equalsIgnoreCase("spawnnpc")) {
-				//spawn fake player with packets
-			} else if (args[0].equalsIgnoreCase("version")) {
-				p.sendMessage("0.0.1");
-			} else if (args[0].equalsIgnoreCase("openinv")) {
-				p.openInventory(getArbeitsamtInv(p));
-			}
-		} else if (args.length == 2) {
-			
 		} else {
-			//send help message
+			p.sendMessage("§6Bitte nutze §c/job");
 		}
 		return false;
 	}
+
 	public static String getJob(Player p) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		return stats.getString("Job.Name");
 	}
-	
-	public static Double getJobXP (Player p, String job) {
+
+	public static Double getJobXP(Player p, String job) {
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
 		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
 		Double xp = 0D;
@@ -71,32 +63,41 @@ public class Job implements CommandExecutor {
 		}
 		return xp;
 	}
-	
+
 	public static Inventory getJobInv(Player p) {
 		Inventory inv = Bukkit.createInventory(null, 27, "§6§lJob");
 		if (getJob(p).equals("miner")) {
-			//TODO add lore with price and xp amount to items
-			inv.setItem(0, Game.createNamedItemStack(Material.COBBLESTONE, 1, "§7Bruchstein"));
-			inv.setItem(2, Game.createNamedItemStack(Material.COAL_ORE, 1, "§7Kohleerz"));
-			inv.setItem(4, Game.createNamedItemStack(Material.COPPER_ORE, 1, "§7Kupfererz"));
-			inv.setItem(6, Game.createNamedItemStack(Material.IRON_ORE, 1, "§7Eisenerz"));
-			inv.setItem(8, Game.createNamedItemStack(Material.GOLD_ORE, 1, "§7Golderz"));
-			inv.setItem(19, Game.createNamedItemStack(Material.REDSTONE_ORE, 1, "§7Redstoneerz"));
-			inv.setItem(21, Game.createNamedItemStack(Material.LAPIS_ORE, 1, "§7Lapiserz"));
-			inv.setItem(23, Game.createNamedItemStack(Material.DIAMOND_ORE, 1, "§7Diamanterz"));
-			inv.setItem(25, Game.createNamedItemStack(Material.EMERALD_ORE, 1, "§7Smaragderz"));
+			// TODO add lore with price and xp amount to items
+			ArrayList<String> lore1 = new ArrayList<String>();
+			ArrayList<String> lore2 = new ArrayList<String>();
+			ArrayList<String> lore3 = new ArrayList<String>();
+			ArrayList<String> lore4 = new ArrayList<String>();
+			ArrayList<String> lore5 = new ArrayList<String>();
+			ArrayList<String> lore6 = new ArrayList<String>();
+			ArrayList<String> lore7 = new ArrayList<String>();
+			ArrayList<String> lore8 = new ArrayList<String>();
+			ArrayList<String> lore9 = new ArrayList<String>();
+			inv.setItem(0, Game.createNamedItemStack(Material.COBBLESTONE, 1, "§7Bruchstein", lore1));
+			inv.setItem(2, Game.createNamedItemStack(Material.COAL_ORE, 1, "§7Kohleerz", lore2));
+			inv.setItem(4, Game.createNamedItemStack(Material.COPPER_ORE, 1, "§7Kupfererz", lore3));
+			inv.setItem(6, Game.createNamedItemStack(Material.IRON_ORE, 1, "§7Eisenerz", lore4));
+			inv.setItem(8, Game.createNamedItemStack(Material.GOLD_ORE, 1, "§7Golderz", lore5));
+			inv.setItem(19, Game.createNamedItemStack(Material.REDSTONE_ORE, 1, "§7Redstoneerz", lore6));
+			inv.setItem(21, Game.createNamedItemStack(Material.LAPIS_ORE, 1, "§7Lapiserz", lore7));
+			inv.setItem(23, Game.createNamedItemStack(Material.DIAMOND_ORE, 1, "§7Diamanterz", lore8));
+			inv.setItem(25, Game.createNamedItemStack(Material.EMERALD_ORE, 1, "§7Smaragderz", lore9));
 		} else if (getJob(p).equals("woodcutter")) {
-			
+
 		} else if (getJob(p).equals("smith")) {
-			
+
 		} else if (getJob(p).equals("fisher")) {
-			
+
 		} else if (getJob(p).equals("farmer")) {
-			
+
 		}
 		return inv;
 	}
-	
+
 	public static Inventory getArbeitsamtInv(Player p) {
 		Inventory inv = Bukkit.createInventory(null, 54, "§6§lArbeitsamt");
 		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
@@ -106,9 +107,9 @@ public class Job implements CommandExecutor {
 		int smithLevel = stats.getInt("Job.Smith.Level");
 		int fisherLevel = stats.getInt("Job.Fisher.Level");
 		int farmerLevel = stats.getInt("Job.Farmer.Level");
-		
+
 		//
-		//set Miner item
+		// set Miner item
 		//
 		ArrayList<String> minerLore = new ArrayList<String>();
 		switch (minerLevel) {
@@ -145,9 +146,9 @@ public class Job implements CommandExecutor {
 		default:
 			break;
 		}
-		
+
 		//
-		//set Woodcutter item
+		// set Woodcutter item
 		//
 		ArrayList<String> woodcutterLore = new ArrayList<String>();
 		switch (woodcutterLevel) {
@@ -184,9 +185,9 @@ public class Job implements CommandExecutor {
 		default:
 			break;
 		}
-		
+
 		//
-		//set Smith item
+		// set Smith item
 		//
 		ArrayList<String> smithLore = new ArrayList<String>();
 		switch (smithLevel) {
@@ -223,9 +224,9 @@ public class Job implements CommandExecutor {
 		default:
 			break;
 		}
-		
+
 		//
-		//set Fisher item
+		// set Fisher item
 		//
 		ArrayList<String> fisherLore = new ArrayList<String>();
 		switch (fisherLevel) {
@@ -262,10 +263,9 @@ public class Job implements CommandExecutor {
 		default:
 			break;
 		}
-		
-		
+
 		//
-		//set Farmer item
+		// set Farmer item
 		//
 		ArrayList<String> farmerLore = new ArrayList<String>();
 		switch (farmerLevel) {
@@ -302,9 +302,9 @@ public class Job implements CommandExecutor {
 		default:
 			break;
 		}
-		
+
 		ArrayList<String> lore = new ArrayList<String>();
-		if(getJob(p).equalsIgnoreCase("none")) {
+		if (getJob(p).equalsIgnoreCase("none")) {
 			lore.add("§cArbeitslos");
 		} else if (getJob(p).equalsIgnoreCase("miner")) {
 			lore.add("§cMiner");
@@ -317,13 +317,13 @@ public class Job implements CommandExecutor {
 		} else if (getJob(p).equalsIgnoreCase("farmer")) {
 			lore.add("§cFarmer");
 		}
-		
+
 		inv.setItem(49, Game.createNamedItemStack(Material.BOOK, 1, "§6Derzeitiger Job", lore));
-		
+
 		inv.setItem(53, Game.createNamedItemStack(Material.BARRIER, 1, "§4Job kündigen"));
-		
+
 		return inv;
-		
+
 	}
 
 }

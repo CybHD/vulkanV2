@@ -112,6 +112,13 @@ public class InventoryClick implements Listener {
 			}
 		} else if (e.getView().getTitle().equals("§6§lJob")) {
 			e.setCancelled(true);
+			Player p = (Player) e.getWhoClicked();
+			if (Job.getJob(p).equals("miner")) {
+				//frage raw slot ab um item erz herauszufinden
+				//dann entferne das item aus dem inventar des spielers
+				//gib dem spieler die job xp und 1 $ mehr als shop price des items falls vorhanden im shop
+				
+			}
 		}
 	}
 }

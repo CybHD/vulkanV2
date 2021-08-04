@@ -25,6 +25,7 @@ commands:
      login:
      lobby:
      boost:
+     create:
      select:
      target:
      report:

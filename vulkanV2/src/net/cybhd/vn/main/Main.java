@@ -127,6 +127,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new EntityChangeBlock(), this);
 		// Bukkit.getPluginManager().registerEvents(new ProjectileHit(), this);
 		Bukkit.getPluginManager().registerEvents(new Ability(), this);
+		Bukkit.getPluginManager().registerEvents(new VillagerHandler(), this);
 
 		this.getCommand("l").setExecutor(new HubExecutor());
 		this.getCommand("hub").setExecutor(new HubExecutor());
@@ -152,6 +153,7 @@ public class Main extends JavaPlugin {
 		this.getCommand("rainbow").setExecutor(new RainbowExecutor());
 		this.getCommand("tpaccept").setExecutor(new TpAcceptExecutor());
 		this.getCommand("tpdeny").setExecutor(new TpDenyExecutor());
+		this.getCommand("create").setExecutor(new VillagerHandler());
 		this.getCommand("claim").setExecutor(new ClaimExecutor());
 		this.getCommand("unclaim").setExecutor(new UnClaimExecutor());
 		this.getCommand("target").setExecutor(new TargetExecutor());

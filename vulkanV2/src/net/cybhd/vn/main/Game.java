@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -36,6 +35,32 @@ public class Game implements Listener {
 		double price_Repair = config.getDouble("Repair.Price.Buy");
 		return price_Repair;
 
+	}
+	
+	public static String formatTime(long time) {
+		time /= 1000L;
+		int days = (int) (time / 86400L);
+		time -= (long) (86400 * days);
+		int hours = (int) (time / 3600L);
+		time -= (long) (3600 * hours);
+		int minutes = (int) (time / 60L);
+		time -= (long) (60 * minutes);
+		int seconds = (int) time;
+		StringBuilder sb = new StringBuilder();
+		
+		if(days != 0) {
+			sb.append("§c" + days).append(" §6Tag").append(days == 1 ? " " : "e ");
+		}
+		if(hours != 0) {
+			sb.append("§c" + hours).append(" §6Stunde").append(hours == 1 ? " " : "n ");
+		}
+		if(minutes != 0) {
+			sb.append("§c" + minutes).append(" §6Minute").append(minutes == 1 ? " " : "n ");
+		}
+		if(seconds != 0) {
+			sb.append("§c" + seconds).append(" §6Sekunde").append(seconds == 1 ? "" : "n");
+		}
+		return sb.toString().trim();
 	}
 
 	public static int count = -1;
@@ -704,6 +729,22 @@ public class Game implements Listener {
 		}
 		return inv;
 	}
+	
+	public static Inventory getDailyRewardInv(Player p) {
+		File fstats = new File("plugins/vulkan/PLAYERS/" + p.getName() + ".yml");
+		YamlConfiguration stats = YamlConfiguration.loadConfiguration(fstats);
+		Inventory inv = Bukkit.createInventory(null, 27, "§6§lTäglichen Belohnung");
+		Boolean reward1Collected = stats.getBoolean("Reward.1.Collected");
+		if (reward1Collected) {
+			ArrayList<String> lore = new ArrayList<String>();
+			inv.setItem(0, Game.createNamedItemStack(Material.GUNPOWDER, 1, "§7Bereits eingesammelt", lore));
+		} else {
+			ArrayList<String> lore = new ArrayList<String>();
+			inv.setItem(0, Game.createNamedItemStack(Material.GOLD_INGOT, 1, "§6Einsammeln", lore));
+		}
+		
+		return inv;
+	}
 
 	public static void openShopInv(Player p, int j) {
 		File fshop = new File("plugins/vulkan/SHOP.yml");
@@ -1147,73 +1188,6 @@ public class Game implements Listener {
 			return true;
 		}
 		return false;
-	}
-
-	public static void destroyBlock(Location loc, String direction) {
-		// LOCATION Table
-		// First Layer
-		// 1 | 2 | 3
-		// 4 | 5 | 6
-		// 7 | 8 | 9
-		// Second Layer
-		// 10 | 11 | 12
-		// 13 | 14 | 15
-		// 16 | 17 | 18
-		// Third Layer
-		// 19 | 20 | 21
-		// 22 | 23 | 24
-		// 25 | 26 | 27
-
-		switch (direction) {
-		case "north":
-			// Location immer neu setzten statt 27 locations
-			Location loc1;
-			Location loc2;
-			Location loc3;
-			Location loc4;
-			Location loc5 = new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ());
-			Location loc6;
-			Location loc7;
-			Location loc8;
-			Location loc9;
-			Location loc10;
-			Location loc11;
-			Location loc12;
-			Location loc13;
-			Location loc14;
-			Location loc15;
-			Location loc16;
-			Location loc17;
-			Location loc18;
-			Location loc19;
-			Location loc20;
-			Location loc21;
-			Location loc22;
-			Location loc23;
-			Location loc24;
-			Location loc25;
-			Location loc26;
-			Location loc27;
-			break;
-		case "south":
-
-			break;
-		case "east":
-
-			break;
-		case "west":
-
-			break;
-		case "up":
-
-			break;
-		case "down":
-
-			break;
-
-		default:
-			break;
-		}
 	}
 
 	public static Inventory getBoostInv() {
