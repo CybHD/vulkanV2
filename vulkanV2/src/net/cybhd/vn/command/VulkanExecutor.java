@@ -54,7 +54,7 @@ public class VulkanExecutor implements CommandExecutor {
 						ps.showPlayer(Main.getMain(), p);
 					}
 					p.setInvulnerable(false);
-					Game.sendConsoleMSG(p.getPlayerListName() + ChatColor.DARK_RED + " > Vanish",
+					Game.sendConsoleMSG(p.getPlayerListName() + ChatColor.GOLD + " ist nicht mehr im Vanish",
 							ChatColor.DARK_RED);
 				} else {
 					p.setMetadata("vulkan.vanish", new FixedMetadataValue(Main.getMain(), true));
@@ -65,7 +65,7 @@ public class VulkanExecutor implements CommandExecutor {
 					for (Player ps : Bukkit.getOnlinePlayers()) {
 						ps.hidePlayer(Main.getMain(), p);
 					}
-					Game.sendConsoleMSG(p.getPlayerListName() + ChatColor.DARK_GREEN + " > Vanish", ChatColor.DARK_GREEN);
+					Game.sendConsoleMSG(p.getPlayerListName() + ChatColor.GOLD + " ist jetzt im Vanish", ChatColor.DARK_GREEN);
 				}
 			}
 			if (args.length == 2 && args[0].equalsIgnoreCase("tp")) {
@@ -119,7 +119,7 @@ public class VulkanExecutor implements CommandExecutor {
 						p.sendMessage("§6Der Spieler §c" + args[1] + " §6ist nicht online");
 					}
 				} else {
-					
+					p.sendMessage("§cDu hast keine Rechte für diesen Befehl");
 				}
 			}
 			if (args.length >= 3 && args[0].equalsIgnoreCase("kick")) {

@@ -685,7 +685,7 @@ public class Game implements Listener {
 				Shop.price_snowball_sell));
 		shop.addItem(newShopItem(Material.FIRE_CHARGE, "§aFeuerkugel", "§aSelten", Shop.price_firecharge_buy,
 				Shop.price_firecharge_sell));
-		shop.addItem(newShopItem(Material.EXPERIENCE_BOTTLE, "§e§lLevelflasche", "§e§lLEGENDÄR",
+		shop.addItem(newShopItem(Material.EXPERIENCE_BOTTLE, "§aLevelflasche", "§aSelten",
 				Shop.price_expbottle_buy, Shop.price_expbottle_sell));
 
 		/*
